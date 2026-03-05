@@ -132,14 +132,16 @@
         .price-name span { display: block; font-size: 0.8rem; color: #aaa; font-weight: normal; }
         .price-value { color: var(--deep-purple); font-weight: 700; font-size: 1.1rem; }
 
+     /* --- 浮動按鈕：專屬 Line 綠色微漸層 --- */
         .floating-btn {
             position: fixed; bottom: 30px; right: 30px;
-            background: linear-gradient(135deg, var(--deep-purple), var(--primary-purple));
+            background: linear-gradient(135deg, #06C755, #05a346);
             color: white; width: 60px; height: 60px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 24px; box-shadow: 0 10px 20px rgba(123, 31, 162, 0.3);
-            z-index: 9999; text-decoration: none;
+            font-size: 28px; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);
+            z-index: 9999; text-decoration: none; transition: 0.3s;
         }
+        .floating-btn:hover { transform: scale(1.1); box-shadow: 0 15px 30px rgba(6, 199, 85, 0.4); }
 
         footer { text-align: center; padding: 60px; color: #ccc; font-size: 0.8rem; }
 
