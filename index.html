@@ -25,33 +25,61 @@
             scroll-behavior: smooth;
         }
 
-        /* --- Hero Section --- */
+        /* --- ✨ 神祕星空 Hero Section (妳要求的調整都在這) --- */
         .hero {
-            height: 80vh;
+            height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, rgba(206,147,216,0.15) 0%, rgba(248,187,208,0.15) 100%), 
-                        url('https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&q=80&w=1500') center/cover;
+            /* 神祕星際背景，疊加深色透明層確保字體清晰 */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1464802686167-b939a67e06a1?auto=format&fit=crop&q=80&w=2000') center/cover;
+            color: white;
             padding: 20px;
         }
 
         .hero h1 {
-            font-size: 3.2rem;
-            color: var(--deep-purple);
-            margin-bottom: 15px;
-            letter-spacing: 5px;
+            font-size: 3.8rem;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: 6px;
+            font-weight: 700;
+            /* 紫色發光字體效果，增加年輕感與對比度 */
+            text-shadow: 0 0 15px rgba(206, 147, 216, 0.9), 0 0 30px rgba(123, 31, 162, 0.6);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin-bottom: 40px;
+            font-weight: 300;
+            text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
         }
 
-        /* --- Navigation --- */
+        /* 現代感毛玻璃按鈕 */
+        .hero .btn-start {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            border: 2px solid var(--soft-pink);
+            padding: 12px 40px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .hero .btn-start:hover {
+            background: var(--soft-pink);
+            color: var(--deep-purple);
+            box-shadow: 0 0 20px rgba(248, 187, 208, 0.5);
+        }
+
+        /* --- 其他區塊樣式 --- */
         .nav { 
             text-align: center; padding: 15px; background: white; 
             position: sticky; top: 0; z-index: 1000;
@@ -61,7 +89,6 @@
         .nav a { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; }
         .nav a:hover { color: var(--deep-purple); }
 
-        /* --- Section Common --- */
         .section { max-width: 1000px; margin: auto; padding: 100px 20px; }
         h2.section-title {
             text-align: center; font-size: 2rem; color: var(--deep-purple); margin-bottom: 60px;
@@ -71,34 +98,22 @@
             content: ""; display: block; width: 30px; height: 3px; background: var(--soft-pink); margin: 15px auto;
         }
 
-        /* --- About Section --- */
         .about-box { 
             background: var(--section-bg); padding: 50px; border-radius: 40px; 
             border-right: 8px solid var(--primary-purple);
         }
 
-        /* --- 療癒項目深度介紹 (Intro Section) --- */
         .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .intro-card { margin-bottom: 40px; }
         .intro-card h3 { color: var(--deep-purple); border-left: 4px solid var(--soft-pink); padding-left: 15px; }
         .intro-card p { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
         
-        /* 妳要求的跳轉鏈接 */
         .jump-link {
-            color: var(--deep-purple);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            border-bottom: 2px solid var(--soft-pink);
-            padding-bottom: 2px;
-            transition: 0.3s;
+            color: var(--deep-purple); text-decoration: none; font-weight: bold; font-size: 0.95rem;
+            display: inline-flex; align-items: center; border-bottom: 2px solid var(--soft-pink);
+            padding-bottom: 2px; transition: 0.3s;
         }
-        .jump-link:hover { color: var(--primary-purple); border-bottom-color: var(--primary-purple); gap: 10px; }
-        .jump-link::after { content: " →"; margin-left: 5px; transition: 0.3s; }
 
-        /* --- 服務收費表 (Pricing Section) --- */
         #pricing { background-color: var(--section-bg); }
         .price-list {
             background: white; border-radius: 30px; overflow: hidden;
@@ -108,19 +123,17 @@
             display: flex; justify-content: space-between; align-items: center;
             padding: 25px 40px; border-bottom: 1px solid #f9f9f9;
         }
-        .price-item:last-child { border-bottom: none; }
         .price-name { font-weight: bold; color: #333; }
         .price-name span { display: block; font-size: 0.8rem; color: #aaa; font-weight: normal; }
         .price-value { color: var(--deep-purple); font-weight: 700; font-size: 1.1rem; }
 
-        /* --- Floating Button --- */
         .floating-btn {
             position: fixed; bottom: 30px; right: 30px;
             background: linear-gradient(135deg, var(--deep-purple), var(--primary-purple));
             color: white; width: 60px; height: 60px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-size: 24px; box-shadow: 0 10px 20px rgba(123, 31, 162, 0.3);
-            z-index: 9999; text-decoration: none; transition: 0.3s;
+            z-index: 9999; text-decoration: none;
         }
 
         footer { text-align: center; padding: 60px; color: #ccc; font-size: 0.8rem; }
