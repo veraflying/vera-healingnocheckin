@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vera_healingnocheckin | 療癒不打卡的命理師微辣</title>
+    <title>療癒不打卡的命理師微辣 | Vera Healing</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -33,72 +33,59 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(10, 10, 31, 0.65), rgba(10, 10, 31, 0.65)), 
-                        url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
-            background-attachment: fixed;
+            /* 使用更穩定的高品質深邃星際背景 */
+            background: linear-gradient(rgba(10, 10, 31, 0.7), rgba(10, 10, 31, 0.7)), 
+                        url('https://images.unsplash.com/photo-1506318137071-a8e063b4b519?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
+            background-attachment: scroll; /* 手機版通常不支援 fixed，改回 scroll 以確保圖片顯示 */
             color: white;
-            padding: 20px;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem; /* 電腦版大小 */
             color: #ffffff;
             margin-bottom: 24px;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             font-weight: 700;
-            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* 乾淨無廉價發光 */
+            white-space: nowrap; /* 強制不換行 */
         }
 
         .hero p {
-            font-size: 1.15rem;
-            color: rgba(255, 255, 255, 0.85);
-            max-width: 700px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
             margin-bottom: 45px;
             font-weight: 300;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .hero .btn-start {
             color: #ffffff;
             text-decoration: none;
             font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 14px 50px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 14px 45px;
             border-radius: 2px;
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            transition: all 0.5s ease;
-            letter-spacing: 3px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
         }
 
         .hero .btn-start:hover {
             background: #ffffff;
             color: #1a1a2e;
-            transform: translateY(-2px);
         }
 
-        /* --- 浮動按鈕樣式 --- */
+        /* --- 浮動按鈕 --- */
         .floating-btn {
-            position: fixed; 
-            bottom: 30px; 
-            right: 30px;
+            position: fixed; bottom: 25px; right: 25px;
             background: linear-gradient(135deg, #06C755, #05a346);
-            color: white; 
-            width: 60px; 
-            height: 60px; 
-            border-radius: 50%;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            font-size: 28px; 
-            box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);
-            z-index: 9999; 
-            text-decoration: none; 
-            transition: 0.3s;
-        }
-        .floating-btn:hover { 
-            transform: scale(1.1); 
-            box-shadow: 0 15px 30px rgba(6, 199, 85, 0.4); 
+            color: white; width: 55px; height: 55px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; box-shadow: 0 8px 15px rgba(6, 199, 85, 0.3);
+            z-index: 9999; text-decoration: none; transition: 0.3s;
         }
 
         /* --- 導覽與區塊 --- */
@@ -106,53 +93,50 @@
             text-align: center; padding: 15px; background: white; 
             position: sticky; top: 0; z-index: 1000;
             border-bottom: 1px solid #f0f0f0;
-            display: flex; justify-content: center; gap: 25px;
+            display: flex; justify-content: center; gap: 20px;
         }
-        .nav a { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; }
-        .nav a:hover { color: var(--deep-purple); }
+        .nav a { text-decoration: none; color: #888; font-size: 0.85rem; }
 
-        .section { max-width: 1000px; margin: auto; padding: 100px 20px; }
-        h2.section-title {
-            text-align: center; font-size: 2rem; color: var(--deep-purple); margin-bottom: 60px;
-            font-weight: 700; position: relative;
-        }
-        h2.section-title::after {
-            content: ""; display: block; width: 30px; height: 3px; background: var(--soft-pink); margin: 15px auto;
-        }
+        .section { max-width: 1000px; margin: auto; padding: 80px 20px; }
+        h2.section-title { text-align: center; color: var(--deep-purple); margin-bottom: 40px; }
 
         .about-box { 
-            background: var(--section-bg); padding: 50px; border-radius: 40px; 
-            border-right: 8px solid var(--primary-purple);
+            background: var(--section-bg); padding: 40px; border-radius: 20px; 
+            border-right: 6px solid var(--primary-purple);
         }
 
-        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .intro-card { margin-bottom: 40px; }
+        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .intro-card { margin-bottom: 30px; }
         .intro-card h3 { color: var(--deep-purple); border-left: 4px solid var(--soft-pink); padding-left: 15px; }
         
         .jump-link {
-            color: var(--deep-purple); text-decoration: none; font-weight: bold; font-size: 0.95rem;
+            color: var(--deep-purple); text-decoration: none; font-weight: bold; font-size: 0.9rem;
             border-bottom: 2px solid var(--soft-pink); transition: 0.3s;
         }
 
         #pricing { background-color: var(--section-bg); }
-        .price-list {
-            background: white; border-radius: 30px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-        }
-        .price-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 40px; border-bottom: 1px solid #f9f9f9;
-        }
-        .price-name { font-weight: bold; color: #333; }
-        .price-name span { display: block; font-size: 0.8rem; color: #aaa; font-weight: normal; }
-        .price-value { color: var(--deep-purple); font-weight: 700; font-size: 1.1rem; }
+        .price-list { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .price-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; border-bottom: 1px solid #f9f9f9; }
+        .price-name { font-weight: bold; font-size: 0.95rem; }
+        .price-name span { display: block; font-size: 0.75rem; color: #aaa; }
 
-        footer { text-align: center; padding: 60px; color: #ccc; font-size: 0.8rem; }
+        footer { text-align: center; padding: 40px; color: #ccc; font-size: 0.75rem; }
 
+        /* --- 📱 手機版專屬修正 (Media Queries) --- */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; letter-spacing: 4px; }
+            .hero { background-attachment: scroll; } /* 修正手機背景不顯示問題 */
+            .hero h1 { 
+                font-size: 1.5rem; /* 大幅縮小字體以適應手機螢幕 */
+                letter-spacing: 2px; 
+                white-space: normal; /* 允許在極小螢幕自動換行但優先保持單行 */
+                display: block;
+                width: 100%;
+            }
+            .hero p { font-size: 0.95rem; padding: 0 10px; }
             .intro-grid { grid-template-columns: 1fr; }
-            .price-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .price-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .nav { gap: 10px; }
+            .nav a { font-size: 0.75rem; }
         }
     </style>
 </head>
