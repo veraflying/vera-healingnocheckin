@@ -33,10 +33,9 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* 使用更高質量的銀河影像，搭配深色深藍/紫色疊加層 */
-            background: linear-gradient(rgba(10, 10, 31, 0.6), rgba(10, 10, 31, 0.6)), 
+            background: linear-gradient(rgba(10, 10, 31, 0.65), rgba(10, 10, 31, 0.65)), 
                         url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
-            background-attachment: fixed; /* 視差滾動效果 */
+            background-attachment: fixed;
             color: white;
             padding: 20px;
         }
@@ -45,9 +44,8 @@
             font-size: 3.5rem;
             color: #ffffff;
             margin-bottom: 24px;
-            letter-spacing: 8px; /* 增加字距營造高端感 */
+            letter-spacing: 8px;
             font-weight: 700;
-            /* 取消廉價發光，改用非常輕微的立體陰影 */
             text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
         }
 
@@ -58,33 +56,52 @@
             margin-bottom: 45px;
             font-weight: 300;
             letter-spacing: 2px;
-            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* 極簡質感的 Ghost Button */
         .hero .btn-start {
             color: #ffffff;
             text-decoration: none;
             font-size: 0.9rem;
             border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 14px 50px;
-            border-radius: 2px; /* 方形微導角更有現代主管的俐落感 */
+            border-radius: 2px;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             transition: all 0.5s ease;
             letter-spacing: 3px;
-            font-weight: 400;
         }
 
         .hero .btn-start:hover {
             background: #ffffff;
             color: #1a1a2e;
-            border-color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* --- 其他區塊樣式 --- */
+        /* --- 浮動按鈕樣式 --- */
+        .floating-btn {
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px;
+            background: linear-gradient(135deg, #06C755, #05a346);
+            color: white; 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 28px; 
+            box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);
+            z-index: 9999; 
+            text-decoration: none; 
+            transition: 0.3s;
+        }
+        .floating-btn:hover { 
+            transform: scale(1.1); 
+            box-shadow: 0 15px 30px rgba(6, 199, 85, 0.4); 
+        }
+
+        /* --- 導覽與區塊 --- */
         .nav { 
             text-align: center; padding: 15px; background: white; 
             position: sticky; top: 0; z-index: 1000;
@@ -97,7 +114,7 @@
         .section { max-width: 1000px; margin: auto; padding: 100px 20px; }
         h2.section-title {
             text-align: center; font-size: 2rem; color: var(--deep-purple); margin-bottom: 60px;
-            position: relative; font-weight: 700;
+            font-weight: 700; position: relative;
         }
         h2.section-title::after {
             content: ""; display: block; width: 30px; height: 3px; background: var(--soft-pink); margin: 15px auto;
@@ -111,12 +128,10 @@
         .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .intro-card { margin-bottom: 40px; }
         .intro-card h3 { color: var(--deep-purple); border-left: 4px solid var(--soft-pink); padding-left: 15px; }
-        .intro-card p { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
         
         .jump-link {
             color: var(--deep-purple); text-decoration: none; font-weight: bold; font-size: 0.95rem;
-            display: inline-flex; align-items: center; border-bottom: 2px solid var(--soft-pink);
-            padding-bottom: 2px; transition: 0.3s;
+            border-bottom: 2px solid var(--soft-pink); transition: 0.3s;
         }
 
         #pricing { background-color: var(--section-bg); }
@@ -132,33 +147,20 @@
         .price-name span { display: block; font-size: 0.8rem; color: #aaa; font-weight: normal; }
         .price-value { color: var(--deep-purple); font-weight: 700; font-size: 1.1rem; }
 
-     /* --- 浮動按鈕：專屬 Line 綠色微漸層 --- */
-        .floating-btn {
-            position: fixed; bottom: 30px; right: 30px;
-            background: linear-gradient(135deg, #06C755, #05a346);
-            color: white; width: 60px; height: 60px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 28px; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);
-            z-index: 9999; text-decoration: none; transition: 0.3s;
-        }
-        .floating-btn:hover { transform: scale(1.1); box-shadow: 0 15px 30px rgba(6, 199, 85, 0.4); }
-<a href="https://lin.ee/IuBJs3j" target="_blank" class="floating-btn" title="立即預約諮詢">
-    <i class="fa-regular fa-comment-dots"></i>
-</a>
         footer { text-align: center; padding: 60px; color: #ccc; font-size: 0.8rem; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; letter-spacing: 4px; }
             .intro-grid { grid-template-columns: 1fr; }
             .price-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .price-value { align-self: flex-end; }
         }
     </style>
 </head>
 <body>
 
-<a href="#social" class="floating-btn"><i class="fa-regular fa-comment-dots"></i></a>
-
+<a href="https://lin.ee/IuBJs3j" target="_blank" class="floating-btn" title="立即私訊預約">
+    <i class="fa-regular fa-comment-dots"></i>
+</a>
 <section class="hero">
     <h1>療癒不打卡的命理師微辣</h1>
     <p>在星辰與能量間尋找平衡，以理性的星盤對話感性的靈魂，<br>陪妳梳理生命的每一份遇見。</p>
