@@ -25,58 +25,63 @@
             scroll-behavior: smooth;
         }
 
-        /* --- ✨ 神祕星空 Hero Section (妳要求的調整都在這) --- */
+        /* --- ✨ 高端神祕感 Hero Section --- */
         .hero {
-            height: 90vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* 神祕星際背景，疊加深色透明層確保字體清晰 */
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                        url('https://images.unsplash.com/photo-1464802686167-b939a67e06a1?auto=format&fit=crop&q=80&w=2000') center/cover;
+            /* 使用更高質量的銀河影像，搭配深色深藍/紫色疊加層 */
+            background: linear-gradient(rgba(10, 10, 31, 0.6), rgba(10, 10, 31, 0.6)), 
+                        url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
+            background-attachment: fixed; /* 視差滾動效果 */
             color: white;
             padding: 20px;
         }
 
         .hero h1 {
-            font-size: 3.8rem;
-            color: #fff;
-            margin-bottom: 20px;
-            letter-spacing: 6px;
+            font-size: 3.5rem;
+            color: #ffffff;
+            margin-bottom: 24px;
+            letter-spacing: 8px; /* 增加字距營造高端感 */
             font-weight: 700;
-            /* 紫色發光字體效果，增加年輕感與對比度 */
-            text-shadow: 0 0 15px rgba(206, 147, 216, 0.9), 0 0 30px rgba(123, 31, 162, 0.6);
+            /* 取消廉價發光，改用非常輕微的立體陰影 */
+            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
         }
 
         .hero p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 800px;
-            margin-bottom: 40px;
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 700px;
+            margin-bottom: 45px;
             font-weight: 300;
-            text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* 現代感毛玻璃按鈕 */
+        /* 極簡質感的 Ghost Button */
         .hero .btn-start {
-            color: white;
+            color: #ffffff;
             text-decoration: none;
-            font-size: 1rem;
-            border: 2px solid var(--soft-pink);
-            padding: 12px 40px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
-            font-weight: bold;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 14px 50px;
+            border-radius: 2px; /* 方形微導角更有現代主管的俐落感 */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            transition: all 0.5s ease;
+            letter-spacing: 3px;
+            font-weight: 400;
         }
 
         .hero .btn-start:hover {
-            background: var(--soft-pink);
-            color: var(--deep-purple);
-            box-shadow: 0 0 20px rgba(248, 187, 208, 0.5);
+            background: #ffffff;
+            color: #1a1a2e;
+            border-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         /* --- 其他區塊樣式 --- */
@@ -92,7 +97,7 @@
         .section { max-width: 1000px; margin: auto; padding: 100px 20px; }
         h2.section-title {
             text-align: center; font-size: 2rem; color: var(--deep-purple); margin-bottom: 60px;
-            position: relative;
+            position: relative; font-weight: 700;
         }
         h2.section-title::after {
             content: ""; display: block; width: 30px; height: 3px; background: var(--soft-pink); margin: 15px auto;
@@ -139,6 +144,7 @@
         footer { text-align: center; padding: 60px; color: #ccc; font-size: 0.8rem; }
 
         @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; letter-spacing: 4px; }
             .intro-grid { grid-template-columns: 1fr; }
             .price-item { flex-direction: column; align-items: flex-start; gap: 10px; }
             .price-value { align-self: flex-end; }
@@ -150,9 +156,9 @@
 <a href="#social" class="floating-btn"><i class="fa-regular fa-comment-dots"></i></a>
 
 <section class="hero">
-    <h1>療癒不打卡的命理師微辣</h1>
-    <p>在星辰與能量間尋找平衡，以理性的星盤對話感性的靈魂，陪妳梳理生命的每一份遇見。</p>
-    <a href="#about" style="color: var(--deep-purple); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--deep-purple); padding: 10px 25px; border-radius: 30px;">開始探索</a>
+    <h1>vera_healingnocheckin</h1>
+    <p>在星辰與能量間尋找平衡，以理性的星盤對話感性的靈魂，<br>陪妳梳理生命的每一份遇見。</p>
+    <a href="#about" class="btn-start">探索微辣空間</a>
 </section>
 
 <div class="nav">
@@ -181,7 +187,7 @@
         </div>
         <div class="intro-card">
             <h3>臼井聖火®靈氣 (Usui Holy Fire® Reiki)</h3>
-            <p>聖火靈氣是一種高頻且精微的能量療癒方式。透過宇宙光能量的傳遞，溫柔地融化積壓在身心的情緒負擔與疲乏。在這一小時的能量沐浴中，我們將進行深層的能量清理與脈輪平衡，幫助妳在繁忙的都市步調中，找回靈魂久違的平靜與內在韌性。</p>
+            <p>臼井聖火靈氣是一種高頻且精微的能量療癒方式。透過宇宙光能量的傳遞，溫柔地融化積壓在身心的情緒負擔與疲乏。在這一小時的能量沐浴中，我們將進行深層的能量清理與脈輪平衡，幫助妳在繁忙的都市步調中，找回靈魂久違的平靜與內在韌性。</p>
             <a href="#pricing" class="jump-link">感受靈魂的洗滌</a>
         </div>
         <div class="intro-card">
@@ -190,7 +196,7 @@
             <a href="#pricing" class="jump-link">開啟豐盛的能量流動</a>
         </div>
         <div class="intro-card">
-            <h3>塔羅 / 紫微牌卡占卜：當下的直覺洞察</h3>
+            <h3>牌卡占卜：當下的直覺洞察</h3>
             <p>當妳感到迷惘、需要一個明確的出口或建議時，牌卡是妳與潛意識對話的最佳橋樑。結合塔羅的直覺洞悉與紫微牌卡的生命智慧，我們針對具體問題進行深度剖析，為妳撥開迷霧，看清當下的能量流向，並提供具體可行的行動指引。</p>
             <a href="#pricing" class="jump-link">撥開當下的迷霧</a>
         </div>
@@ -221,7 +227,6 @@
             <div class="price-value">私訊詢價</div>
         </div>
     </div>
-    <p style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #888;">* 具體方案細節與多次諮詢優惠，請透過社群平台私訊洽詢。</p>
 </div>
 
 <div class="section" id="social" style="text-align: center;">
