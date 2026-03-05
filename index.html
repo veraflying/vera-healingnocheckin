@@ -3,173 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>療癒不打卡的命理師微辣 | vera_healingnocheckin</title>
+    <title>vera_healingnocheckin | 療癒不打卡的命理師微辣</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-    /* 全體字體與背景 */
-    body { 
-        font-family: 'Noto Sans TC', sans-serif; 
-        margin: 0; 
-        color: #4a4a4a; 
-        background-color: #faf7ff; /* 極淺的薰衣草白，增加靈性氛圍 */
-        line-height: 1.8;
-    }
-
-    /* 頂部 Header：使用紫色與粉色的漸層，並增加文字陰影讓名字更清晰 */
-    header { 
-        background: linear-gradient(135deg, #8e94f3 0%, #ffb7c5 100%); 
-        color: white; 
-        padding: 80px 20px; 
-        text-align: center; 
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-        font-size: 2.5em;
-        margin-bottom: 10px;
-        letter-spacing: 2px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 讓名字更立體跳脫 */
-    }
-
-    header p {
-        font-size: 1.1em;
-        font-weight: 300;
-        opacity: 0.9;
-    }
-
-    /* 導覽列：改為優雅的深紫色 */
-    .nav { 
-        text-align: center; 
-        padding: 20px; 
-        background: white; 
-        position: sticky; 
-        top: 0; 
-        z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .nav a { 
-        margin: 0 15px; 
-        text-decoration: none; 
-        color: #6a5acd; /* 石板紫 */
-        font-weight: bold; 
-        transition: 0.3s;
-    }
-
-    .nav a:hover {
-        color: #ff8fab; /* 滑過時變為粉色 */
-    }
-
-    /* 內容區塊 */
-    .container { 
-        max-width: 900px; 
-        margin: auto; 
-        padding: 60px 20px; 
-    }
-
-    /* 服務卡片：增加粉紫色側邊線 */
-    .service-card { 
-        background: white; 
-        padding: 30px; 
-        margin-bottom: 25px; 
-        border-radius: 15px; 
-        box-shadow: 0 10px 20px rgba(106, 90, 205, 0.05); 
-        border-left: 6px solid #dcd6f7; /* 淺紫裝飾線 */
-        transition: transform 0.3s;
-    }
-
-    .service-card:hover {
-        transform: translateY(-5px); /* 滑鼠移上去有輕微浮起感，增加互動感 */
-        border-left: 6px solid #ffb7c5; /* 懸停變粉色 */
-    }
-
-    h2 { 
-        color: #6a5acd; 
-        border-bottom: 2px solid #f0e6ff;
-        display: inline-block;
-        padding-bottom: 10px;
-        margin-bottom: 30px;
-    }
-
-    h3 {
-        color: #4b0082;
-        margin-top: 0;
-    }
-
-    /* 社群圖示顏色 */
-    .social-icons a { 
-        color: #8e94f3; 
-        font-size: 40px; 
-        margin: 0 20px;
-        transition: 0.3s;
-    }
     
-    .social-icons a:hover {
-        color: #ff8fab;
-    }
-</style>
+    <style>
+        :root {
+            --primary-purple: #ce93d8; 
+            --soft-pink: #f8bbd0;     
+            --deep-purple: #7b1fa2;    
+            --text-gray: #444;
+            --bg-light: #ffffff;
+            --section-bg: #fdfbff;
+        }
+
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            margin: 0; color: var(--text-gray); 
+            background-color: var(--bg-light); 
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(206,147,216,0.15) 0%, rgba(248,187,208,0.15) 100%), 
+                        url('https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&q=80&w=1500') center/cover;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            color: var(--deep-purple);
+            margin-bottom: 15px;
+            letter-spacing: 5px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* --- Navigation --- */
+        .nav { 
+            text-align: center; padding: 15px; background: white; 
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex; justify-content: center; gap: 25px;
+        }
+        .nav a { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; }
+        .nav a:hover { color: var(--deep-purple); }
+
+        /* --- Section Common --- */
+        .section { max-width: 1000px; margin: auto; padding: 100px 20px; }
+        h2.section-title {
+            text-align: center; font-size: 2rem; color: var(--deep-purple); margin-bottom: 60px;
+            position: relative;
+        }
+        h2.section-title::after {
+            content: ""; display: block; width: 30px; height: 3px; background: var(--soft-pink); margin: 15px auto;
+        }
+
+        /* --- About Section --- */
+        .about-box { 
+            background: var(--section-bg); padding: 50px; border-radius: 40px; 
+            border-right: 8px solid var(--primary-purple);
+        }
+
+        /* --- 療癒項目深度介紹 (Intro Section) --- */
+        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .intro-card { margin-bottom: 40px; }
+        .intro-card h3 { color: var(--deep-purple); border-left: 4px solid var(--soft-pink); padding-left: 15px; }
+        .intro-card p { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
+        
+        /* 妳要求的跳轉鏈接 */
+        .jump-link {
+            color: var(--deep-purple);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            border-bottom: 2px solid var(--soft-pink);
+            padding-bottom: 2px;
+            transition: 0.3s;
+        }
+        .jump-link:hover { color: var(--primary-purple); border-bottom-color: var(--primary-purple); gap: 10px; }
+        .jump-link::after { content: " →"; margin-left: 5px; transition: 0.3s; }
+
+        /* --- 服務收費表 (Pricing Section) --- */
+        #pricing { background-color: var(--section-bg); }
+        .price-list {
+            background: white; border-radius: 30px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .price-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 40px; border-bottom: 1px solid #f9f9f9;
+        }
+        .price-item:last-child { border-bottom: none; }
+        .price-name { font-weight: bold; color: #333; }
+        .price-name span { display: block; font-size: 0.8rem; color: #aaa; font-weight: normal; }
+        .price-value { color: var(--deep-purple); font-weight: 700; font-size: 1.1rem; }
+
+        /* --- Floating Button --- */
+        .floating-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, var(--deep-purple), var(--primary-purple));
+            color: white; width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; box-shadow: 0 10px 20px rgba(123, 31, 162, 0.3);
+            z-index: 9999; text-decoration: none; transition: 0.3s;
+        }
+
+        footer { text-align: center; padding: 60px; color: #ccc; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            .intro-grid { grid-template-columns: 1fr; }
+            .price-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .price-value { align-self: flex-end; }
+        }
+    </style>
 </head>
 <body>
 
-<header>
+<a href="#social" class="floating-btn"><i class="fa-regular fa-comment-dots"></i></a>
+
+<section class="hero">
     <h1>療癒不打卡的命理師微辣</h1>
     <p>在星辰與能量間尋找平衡，以理性的星盤對話感性的靈魂，陪妳梳理生命的每一份遇見。</p>
-</header>
+    <a href="#about" style="color: var(--deep-purple); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--deep-purple); padding: 10px 25px; border-radius: 30px;">開始探索</a>
+</section>
 
 <div class="nav">
-    <a href="#about">關於我</a>
-    <a href="#services">療癒服務</a>
-    <a href="#social">與我連結</a>
+    <a href="#about">關於初衷</a>
+    <a href="#intro">項目介紹</a>
+    <a href="#pricing">服務收費</a>
+    <a href="#social">預約諮詢</a>
 </div>
 
-<div class="container" id="about">
-    <h2>關於 Vera微辣</h2>
-    <p>我是 Vera，可以叫我微辣，一位穿梭於大企業職場與靈性療癒世界的引導者。我熱衷於透過紫微斗數解析生命藍圖，藉由臼井靈氣平復身心壓力，並用塔羅牌洞察當下的契機。</p>
-</div>
-
-<div class="container" id="services">
-    <h2>療癒項目</h2>
-    
-    <div class="service-card">
-        <h3>紫微斗數諮詢：生命地圖的解碼與導航</h3>
-        <p>透過星盤的精密排列，我們不只是在看「宿命」，而是在解讀妳專屬的生命藍圖。從性格天賦、人際關係到流年運勢的起伏，我將陪伴妳釐清目前的生命課題，幫助妳在人生的十字路口學習如何「順勢而為」，找到最自在的發揮空間。</p>
-    </div>
-
-    <div class="service-card">
-        <h3>臼井聖火®靈氣 (Usui Holy Fire® Reiki)</h3>
-        <p>聖火靈氣是一種高頻且精微的能量療癒方式。透過宇宙光能量的傳遞，溫柔地融化積壓在身心的情緒負擔與疲乏。在這一小時的能量沐浴中，我們將進行深層的能量清理與脈輪平衡，幫助妳在繁忙的都市步調中，找回靈魂久違的平靜與內在韌性。</p>
-    </div>
-
-    <div class="service-card">
-        <h3>豐盛金錢靈氣 (Money Reiki)</h3>
-        <p>豐盛不只是帳戶裡的數字，更是一種與物質世界的和諧關係。這項服務專注於清理潛意識中對「匱乏」的恐懼，並轉化阻礙財富流動的陳舊信念。透過能量的調整與祝福，協助妳的頻率對準豐盛，吸引符合妳最高利益的機會、資源與財富能量進入生活。</p>
-    </div>
-
-    <div class="service-card">
-        <h3>塔羅 / 紫微牌卡占卜：當下的直覺洞察</h3>
-        <p>當妳感到迷惘、需要一個明確的出口或建議時，牌卡是妳與潛意識對話的最佳橋樑。結合塔羅的直覺洞悉與紫微牌卡的生命智慧，我們針對具體問題進行深度剖析，為妳撥開迷霧，看清當下的能量流向，並提供具體可行的行動指引。</p>
+<div class="section" id="about">
+    <h2 class="section-title">我的初衷</h2>
+    <div class="about-box">
+        <p>
+            我曾經是大型企業中高效運轉的主管，習慣用邏輯解決所有難題。然而，在生命的流動中，我學會了在理性之外，如何透過能量與星辰聽見靈魂的聲音。在這裡，我不只是妳的諮詢師，更是陪妳找回生命平衡的夥伴。
+        </p>
     </div>
 </div>
 
-<div class="container" id="social" style="text-align: center;">
-    <h2>與我連結</h2>
-    <p>歡迎追蹤我的日常分享，或是直接開啟一段療癒對話~</p>
-    
-    <div class="social-icons">
-        <a href="https://www.instagram.com/vera_healingnocheckin" target="_blank" title="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a href="https://www.threads.net/@vera_healingnocheckin" target="_blank" title="Threads">
-            <i class="fa-brands fa-threads"></i>
-        </a>
-        <a href="https://lin.ee/IuBJs3j" target="_blank" title="Line 預約">
-            <i class="fa-regular fa-comment-dots"></i>
-        </a>
+<div class="section" id="intro">
+    <h2 class="section-title">療癒項目介紹</h2>
+    <div class="intro-grid">
+        <div class="intro-card">
+            <h3>紫微斗數諮詢：生命地圖的解碼與導航</h3>
+            <p>透過星盤的精密排列，我們不只是在看「宿命」，而是在解讀妳專屬的生命藍圖。從性格天賦、人際關係到流年運勢的起伏，我將陪伴妳釐清目前的生命課題，幫助妳在人生的十字路口學習如何「順勢而為」，找到最自在的發揮空間。</p>
+            <a href="#pricing" class="jump-link">探索妳的生命藍圖</a>
+        </div>
+        <div class="intro-card">
+            <h3>臼井聖火®靈氣 (Usui Holy Fire® Reiki)</h3>
+            <p>聖火靈氣是一種高頻且精微的能量療癒方式。透過宇宙光能量的傳遞，溫柔地融化積壓在身心的情緒負擔與疲乏。在這一小時的能量沐浴中，我們將進行深層的能量清理與脈輪平衡，幫助妳在繁忙的都市步調中，找回靈魂久違的平靜與內在韌性。</p>
+            <a href="#pricing" class="jump-link">感受靈魂的洗滌</a>
+        </div>
+        <div class="intro-card">
+            <h3>豐盛金錢靈氣 (Money Reiki)</h3>
+            <p>豐盛不只是帳戶裡的數字，更是一種與物質世界的和諧關係。這項服務專注於清理潛意識中對「匱乏」的恐懼，並轉化阻礙財富流動的陳舊信念。透過能量的調整與祝福，協助妳的頻率對準豐盛，吸引符合妳最高利益的機會、資源與財富能量進入生活。</p>
+            <a href="#pricing" class="jump-link">開啟豐盛的能量流動</a>
+        </div>
+        <div class="intro-card">
+            <h3>塔羅 / 紫微牌卡占卜：當下的直覺洞察</h3>
+            <p>當妳感到迷惘、需要一個明確建議時，牌卡是與潛意識對話的最佳橋樑。針對具體問題進行深度剖析，撥開眼前迷霧。</p>
+            <a href="#pricing" class="jump-link">撥開當下的迷霧</a>
+        </div>
     </div>
 </div>
 
-<footer style="text-align: center; padding: 60px; color: #888; font-size: 14px;">
-    &copy; 2026 vera_healingnocheckin. 在豐盛中遇見自己。
+<div class="section" id="pricing">
+    <h2 class="section-title">服務收費</h2>
+    <div class="price-list">
+        <div class="price-item">
+            <div class="price-name">牌卡直覺占卜<span>單個問題 / 15-20 min</span></div>
+            <div class="price-value">TWD 299</div>
+        </div>
+        <div class="price-item">
+            <div class="price-name">紫微斗數基本諮詢<span>單次 / 40-60 min</span></div>
+            <div class="price-value">TWD 1,399</div>
+        </div>
+        <div class="price-item">
+            <div class="price-name">關係能量合盤<span>雙人關係 / 30 min</span></div>
+            <div class="price-value">TWD 999 - 1,299</div>
+        </div>
+        <div class="price-item">
+            <div class="price-name">生命起名 / 改名<span>單次服務</span></div>
+            <div class="price-value">TWD 2,000</div>
+        </div>
+        <div class="price-item">
+            <div class="price-name">深度療癒與長期專案<span>靈氣 / 包年 / 優惠</span></div>
+            <div class="price-value">私訊詢價</div>
+        </div>
+    </div>
+    <p style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #888;">* 具體方案細節與多次諮詢優惠，請透過社群平台私訊洽詢。</p>
+</div>
+
+<div class="section" id="social" style="text-align: center;">
+    <h2 class="section-title">與我連結</h2>
+    <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px;">
+        <a href="https://www.instagram.com/vera_healingnocheckin" target="_blank" style="color:#E1306C; font-size: 40px;"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.threads.net/@vera_healingnocheckin" target="_blank" style="color:#000; font-size: 40px;"><i class="fa-brands fa-threads"></i></a>
+        <a href="https://lin.ee/IuBJs3j" target="_blank" style="color:#06C755; font-size: 40px;"><i class="fa-regular fa-comment-dots"></i></a>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 vera_healingnocheckin. 在繁華中靜心。
 </footer>
 
 </body>
