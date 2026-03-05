@@ -25,7 +25,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- ✨ 修正背景圖：深邃星際 Hero Section --- */
+        /* --- ✨ 背景圖：深邃星際 Hero Section --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -33,7 +33,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* 換成極高畫質的深藍色銀河，並加深遮罩確保文字清晰 */
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
                         url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=2000') center/cover no-repeat;
             background-attachment: scroll; 
@@ -45,10 +44,10 @@
             font-size: 3.5rem;
             color: #ffffff;
             margin-bottom: 24px;
-            letter-spacing: 8px; /* 增加字距營造高級感 */
+            letter-spacing: 8px;
             font-weight: 700;
-            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6); /* 捨棄廉價發光，改用質感陰影 */
-            white-space: nowrap; /* 強制不換行 */
+            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+            white-space: nowrap;
         }
 
         .hero p {
@@ -79,7 +78,6 @@
             color: #1a1a2e;
         }
 
-        /* --- 💎 修正導覽列：字體放大 --- */
         .nav { 
             text-align: center; 
             padding: 25px 0; 
@@ -87,19 +85,18 @@
             position: sticky; top: 0; z-index: 1000;
             border-bottom: 1px solid #f0f0f0;
             display: flex; justify-content: center; 
-            gap: 40px; /* 增加選項間距 */
+            gap: 40px;
         }
         .nav a { 
             text-decoration: none; 
             color: #555; 
-            font-size: 1.15rem; /* 字體放大 */
+            font-size: 1.15rem;
             font-weight: 500;
             letter-spacing: 2px;
             transition: 0.3s;
         }
         .nav a:hover { color: var(--deep-purple); }
 
-        /* --- 浮動按鈕 --- */
         .floating-btn {
             position: fixed; bottom: 30px; right: 30px;
             background: linear-gradient(135deg, #06C755, #05a346);
@@ -109,24 +106,23 @@
             z-index: 9999; text-decoration: none; transition: 0.3s;
         }
 
-       /* --- 內容區塊通用樣式 --- */
         .section { max-width: 1100px; margin: auto; padding: 100px 20px; }
         h2.section-title { text-align: center; color: var(--deep-purple); margin-bottom: 60px; font-weight: 700; font-size: 2rem; }
 
-        /* ✨ 優化「我的初衷」：兩欄式照片與文字 */
+        /* ✨ 修正後的初衷排版 */
         .about-box { 
             background: var(--section-bg); padding: 50px; border-radius: 30px; 
-            display: flex; align-items: center; gap: 50px;
+            display: flex; align-items: flex-start; gap: 50px;
             border-right: 8px solid var(--primary-purple);
         }
 
-        .about-photo { flex: 1; text-align: center; min-width: 250px; }
+        .about-photo { flex: 0 0 200px; text-align: center; }
         .about-photo img { 
             width: 200px; height: 200px; border-radius: 50%; object-fit: cover; 
             border: 4px solid var(--soft-pink); 
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .about-text { flex: 2; font-size: 0.95rem; color: #444; line-height: 2; }
+        .about-text { flex: 1; font-size: 0.95rem; color: #444; line-height: 2; }
         .about-text strong { color: var(--deep-purple); font-weight: 700; }
 
         .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -147,14 +143,22 @@
 
         footer { text-align: center; padding: 60px; color: #ccc; font-size: 0.85rem; }
 
-        /* --- 📱 手機版專屬優化 --- */
+        /* --- 📱 手機版修正：解決文字被擠壓問題 --- */
         @media (max-width: 768px) {
             .hero h1 { 
-                font-size: 1.6rem; /* 確保辣字不掉下去 */
+                font-size: 1.6rem; 
                 letter-spacing: 3px;
                 white-space: nowrap; 
             }
-            .hero p { font-size: 0.95rem; }
+            .about-box { 
+                flex-direction: column; /* 改為上下排列，解決擠壓問題 */
+                align-items: center; 
+                padding: 30px 20px; 
+                gap: 30px; 
+            }
+            .about-photo { flex: 0 0 auto; }
+            .about-text { text-align: left; width: 100%; }
+            
             .nav { gap: 15px; padding: 15px 0; }
             .nav a { font-size: 0.95rem; letter-spacing: 1px; }
             .intro-grid { grid-template-columns: 1fr; }
@@ -184,31 +188,32 @@
 <div class="section" id="about">
     <h2 class="section-title">我的初衷</h2>
     <div class="about-box">
-            <div class="about-photo">
+        <div class="about-photo">
             <img src="profile.png" alt="Vera">
         </div>
         <div class="about-text">
-              <p>
-            <br><strong>我的初衷：在繁雜日常中，陪妳看見靈魂的光影</strong>
-            <br><br>
-<br><strong>「在高效的邏輯背後，我也曾是那個在瑣事中失焦的人。」</strong>
+            <p>
+                <br><strong>我的初衷：在繁雜日常中，陪妳看見靈魂的光影</strong>
+                <br><br>
+    <br><strong>「在高效的邏輯背後，我也曾是那個在瑣事中失焦的人。」</strong>
 
-<br>在職業生涯中，我是大型企業裡習慣 996 節奏、追求極致效率的主管。我曾深信邏輯與數字能解決世上所有的難題。但在脫下西裝後，我同時也是一位妻子，以及兩個孩子的母親。
+    <br>在職業生涯中，我是大型企業裡習慣 996 節奏、追求極致效率的主管。我曾深信邏輯與數字能解決世上所有的難題。但在脫下西裝後，我同時也是一位妻子，以及兩個孩子的母親。
 
-<br>生活並不總是溫柔的。在管理團隊、處理家庭矛盾、擔憂孩子健康、以及平衡職場壓力的夾縫中，我也曾感到無盡的煩心與疲憊。那種被生活推著走、逐漸失去自我的窒息感，我懂。
-<br><br>
-<br><strong>「學會向內看，是送給自己最好的禮物。」</strong>
+    <br>生活並不總是溫柔的。在管理團隊、處理家庭矛盾、擔憂孩子健康、以及平衡職場壓力的夾縫中，我也曾感到無盡的煩心與疲憊。那種被生活推著走、逐漸失去自我的窒息感，我懂。
+    <br><br>
+    <br><strong>「學會向內看，是送給自己最好的禮物。」</strong>
 
-<br>正是在這些「煩心」的磨練中，我遇見了星辰與能量。我發現，當我們學會放下外在的喧囂，轉而向內看時，那些卡住的邏輯才會鬆動，真正的平靜才會緩緩升起。
+    <br>正是在這些「煩心」的磨練中，我遇見了星辰與能量。我發現，當我們學會放下外在的喧囂，轉而向內看時，那些卡住的邏輯才會鬆動，真正的平靜才會緩緩升起。
 
-<br>透過紫微斗數的生命地圖與臼井聖火靈氣的溫柔撫慰，我找回了在理性職場與感性生活間的平衡。我依然在山林間靜心觀察鳥影，捕捉大自然不期而遇的美好，並將這份平靜帶回我的家庭與工作中。
-<br><br>
-<br><strong>「我不專屬妳的諮詢師，更是與妳並肩前行的夥伴。」</strong>
+    <br>透過紫微斗數的生命地圖與臼井聖火靈氣的溫柔撫慰，我找回了在理性職場與感性生活間的平衡。我依然在山林間靜心觀察鳥影，捕捉大自然不期而遇的美好，並將這份平靜帶回我的家庭與工作中。
+    <br><br>
+    <br><strong>「我不專屬妳的諮詢師，更是與妳並肩前行的夥伴。」</strong>
 
-<br>我的初衷很簡單：我想幫助那些同樣在多重身分中感到迷惘的妳。
+    <br>我的初衷很簡單：我想幫助那些同樣在多重身分中感到迷惘的妳。
 
-<br>我不只提供精準的星盤解讀或能量清理，更想分享一套「在亂世中靜心」的方法。我想陪著妳撥開生活的迷霧，看清妳真正的生命方向。讓我們一起學習，在不打卡的療癒時光裡，找回那份本自具足的豐盛與平靜。
-        </p>
+    <br>我不只提供精準的星盤解讀或能量清理，更想分享一套「在亂世中靜心」的方法。我想陪著妳撥開生活的迷霧，看清妳真正的生命方向。讓我們一起學習，在不打卡的療癒時光裡，找回那份本自具足的豐盛與平靜。
+            </p>
+        </div>
     </div>
 </div>
 
@@ -216,27 +221,33 @@
     <h2 class="section-title">專業資歷 / Credentials</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; text-align: center;">
         
-      <div class="about-box" style="padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
-            <i class="fa-solid fa-hand-sparkles" style="font-size: 2rem; color: var(--deep-purple); margin-bottom: 15px;"></i>
-            <h3 style="color: var(--deep-purple); margin-bottom: 15px; font-size: 1.3rem;">能量療癒</h3>
+        <div class="about-box" style="display: block; padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
+                <i class="fa-solid fa-hand-sparkles" style="font-size: 1.8rem; color: var(--deep-purple);"></i>
+                <h3 style="color: var(--deep-purple); margin: 0; font-size: 1.3rem;">能量療癒</h3>
+            </div>
             <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #666; text-align: left; display: inline-block;">
                 <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>臼井聖火®靈氣二階認證</li>
                 <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>金錢靈氣 (Money Reiki) 大師階</li>
             </ul>
         </div>
 
-        <div class="about-box" style="padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
-            <i class="fa-solid fa-moon" style="font-size: 2rem; color: var(--deep-purple); margin-bottom: 15px;"></i>
-            <h3 style="color: var(--deep-purple); margin-bottom: 15px; font-size: 1.3rem;">命理諮詢</h3>
+        <div class="about-box" style="display: block; padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
+                <i class="fa-solid fa-moon" style="font-size: 1.8rem; color: var(--deep-purple);"></i>
+                <h3 style="color: var(--deep-purple); margin: 0; font-size: 1.3rem;">命理諮詢</h3>
+            </div>
             <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #666; text-align: left; display: inline-block;">
                 <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>紫微斗數及風水專業諮詢認證</li>
                 <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>直覺塔羅與牌卡解析</li>
             </ul>
         </div>
 
-        <div class="about-box" style="padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
-            <i class="fa-solid fa-briefcase" style="font-size: 2rem; color: var(--deep-purple); margin-bottom: 15px;"></i>
-            <h3 style="color: var(--deep-purple); margin-bottom: 15px; font-size: 1.3rem;">社會履歷</h3>
+        <div class="about-box" style="display: block; padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
+                <i class="fa-solid fa-briefcase" style="font-size: 1.8rem; color: var(--deep-purple);"></i>
+                <h3 style="color: var(--deep-purple); margin: 0; font-size: 1.3rem;">社會履歷</h3>
+            </div>
             <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #666; text-align: left; display: inline-block;">
                 <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>大型企業主管</li>
                 <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>邏輯整合與決策分析</li>
