@@ -1,19 +1,112 @@
-HTML
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vera_healingnocheckin | 療癒不打卡的命理師微辣</title>
-    <style>
-        body { font-family: 'Noto Sans TC', sans-serif; margin: 0; color: #333; background-color: #fdfaf6; }
-        header { background: #4a5d4e; color: white; padding: 60px 20px; text-align: center; }
-        .container { max-width: 900px; margin: auto; padding: 40px 20px; }
-        .service-card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1, h2 { color: #2c3e50; }
-        .nav { text-align: center; margin-top: 20px; }
-        .nav a { margin: 0 15px; text-decoration: none; color: #4a5d4e; font-weight: bold; }
-    </style>
+    <title>療癒不打卡的命理師微辣 | vera_healingnocheckin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    /* 全體字體與背景 */
+    body { 
+        font-family: 'Noto Sans TC', sans-serif; 
+        margin: 0; 
+        color: #4a4a4a; 
+        background-color: #faf7ff; /* 極淺的薰衣草白，增加靈性氛圍 */
+        line-height: 1.8;
+    }
+
+    /* 頂部 Header：使用紫色與粉色的漸層，並增加文字陰影讓名字更清晰 */
+    header { 
+        background: linear-gradient(135deg, #8e94f3 0%, #ffb7c5 100%); 
+        color: white; 
+        padding: 80px 20px; 
+        text-align: center; 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 讓名字更立體跳脫 */
+    }
+
+    header p {
+        font-size: 1.1em;
+        font-weight: 300;
+        opacity: 0.9;
+    }
+
+    /* 導覽列：改為優雅的深紫色 */
+    .nav { 
+        text-align: center; 
+        padding: 20px; 
+        background: white; 
+        position: sticky; 
+        top: 0; 
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .nav a { 
+        margin: 0 15px; 
+        text-decoration: none; 
+        color: #6a5acd; /* 石板紫 */
+        font-weight: bold; 
+        transition: 0.3s;
+    }
+
+    .nav a:hover {
+        color: #ff8fab; /* 滑過時變為粉色 */
+    }
+
+    /* 內容區塊 */
+    .container { 
+        max-width: 900px; 
+        margin: auto; 
+        padding: 60px 20px; 
+    }
+
+    /* 服務卡片：增加粉紫色側邊線 */
+    .service-card { 
+        background: white; 
+        padding: 30px; 
+        margin-bottom: 25px; 
+        border-radius: 15px; 
+        box-shadow: 0 10px 20px rgba(106, 90, 205, 0.05); 
+        border-left: 6px solid #dcd6f7; /* 淺紫裝飾線 */
+        transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px); /* 滑鼠移上去有輕微浮起感，增加互動感 */
+        border-left: 6px solid #ffb7c5; /* 懸停變粉色 */
+    }
+
+    h2 { 
+        color: #6a5acd; 
+        border-bottom: 2px solid #f0e6ff;
+        display: inline-block;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+    }
+
+    h3 {
+        color: #4b0082;
+        margin-top: 0;
+    }
+
+    /* 社群圖示顏色 */
+    .social-icons a { 
+        color: #8e94f3; 
+        font-size: 40px; 
+        margin: 0 20px;
+        transition: 0.3s;
+    }
+    
+    .social-icons a:hover {
+        color: #ff8fab;
+    }
+</style>
 </head>
 <body>
 
@@ -55,25 +148,23 @@ HTML
 
 <div class="container" id="social" style="text-align: center;">
     <h2>與我連結</h2>
-    <p>除了專業諮詢，我也在社群平台上分享日常的靈感與覺察。歡迎來到我的空間，讓我們一起找回內在的平靜。</p>
+    <p>歡迎追蹤我的日常分享，或是直接開啟一段療癒對話~</p>
     
-    <div style="margin-top: 30px;">
-        <a href="https://www.instagram.com/vera_healingnocheckin" target="_blank" style="display: inline-block; padding: 10px 25px; background-color: #bc8f8f; color: white; text-decoration: none; border-radius: 25px; margin: 8px; transition: 0.3s;">
-            Instagram 日常
+    <div class="social-icons">
+        <a href="https://www.instagram.com/vera_healingnocheckin" target="_blank" title="Instagram">
+            <i class="fa-brands fa-instagram"></i>
         </a>
-
-        <a href="https://www.threads.net/@vera_healingnocheckin" target="_blank" style="display: inline-block; padding: 10px 25px; background-color: #000000; color: white; text-decoration: none; border-radius: 25px; margin: 8px; transition: 0.3s;">
-            Threads 隨筆
+        <a href="https://www.threads.net/@vera_healingnocheckin" target="_blank" title="Threads">
+            <i class="fa-brands fa-threads"></i>
         </a>
-
-        <a href="https://lin.ee/IuBJs3j" target="_blank" style="display: inline-block; padding: 10px 25px; background-color: #4a5d4e; color: white; text-decoration: none; border-radius: 25px; margin: 8px; transition: 0.3s;">
-            私訊預約諮詢
+        <a href="https://lin.ee/IuBJs3j" target="_blank" title="Line 預約">
+            <i class="fa-regular fa-comment-dots"></i>
         </a>
     </div>
 </div>
 
-<footer style="text-align: center; padding: 40px; color: #888;">
-    &copy; 2026 vera_healingnocheckin. All rights reserved.
+<footer style="text-align: center; padding: 60px; color: #888; font-size: 14px;">
+    &copy; 2026 vera_healingnocheckin. 在豐盛中遇見自己。
 </footer>
 
 </body>
