@@ -286,39 +286,159 @@
 </div>
 
 <div class="section" id="pricing">
-    <h2 class="section-title">服務收費</h2>
-    <div class="price-list">
-        <div class="price-item">
-            <div class="price-name">A. 牌卡直覺占卜<span>單個問題(多個問題/包月/包年套餐優惠另外咨詢) / 15-20 min</span></div>
-            <div class="price-value">TWD 299</div>
+    <h2 class="section-title">服務收費 / Pricing</h2>
+    
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="openTab(event, 'ziwei')">紫微導航</button>
+        <button class="tab-btn" onclick="openTab(event, 'fengshui')">家宅風水</button>
+        <button class="tab-btn" onclick="openTab(event, 'reiki')">能量療癒</button>
+        <button class="tab-btn" onclick="openTab(event, 'guidance')">直覺指引</button>
+    </div>
+
+    <div id="ziwei" class="price-content active">
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【探索自我】個案基本諮詢</h3>
+                <p class="card-desc">專注個人命盤與流年指引，解決目前生命的卡點與迷惘 (40-60min)</p>
+            </div>
+            <div class="card-value"><span>TWD</span>1,399</div>
         </div>
-        <div class="price-item">
-            <div class="price-name">B. 紫微斗數個案基本諮詢<span>單次，包含大限/流年指引 / 40-60 min</span></div>
-            <div class="price-value">TWD 1,399</div>
+        <div class="price-card featured">
+            <span class="featured-badge">推薦方案</span>
+            <div class="card-info">
+                <h3 class="card-title">【關係導航】個案 + 合盤</h3>
+                <p class="card-desc">個人深度解析 + 關係攻略加購。全方位釐清妳與對方的能量互動 (70-100min)</p>
+            </div>
+            <div class="card-value"><span>TWD</span>2,698</div>
         </div>
-        <div class="price-item">
-            <div class="price-name">C. 【關係導航】個案+合盤<span>個人深度解析 + 關係攻略加購 / 70~100 min</span></div>
-            <div class="price-value">TWD 2698</div>
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【雙人同行】全效合盤</h3>
+                <p class="card-desc">包含兩位完整命盤解析 + 深度關係合盤 (110-160min)</p>
+            </div>
+            <div class="card-value"><span>TWD</span>4,999</div>
         </div>
-          <div class="price-item">
-            <div class="price-name">D. 【雙人同行】全效合盤<span>包含兩位完整命盤解析 + 深度關係合盤 / 110~160 min</span></div>
-            <div class="price-value">TWD 4999</div>
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【生命祝福】專業起名/改名</h3>
+                <p class="card-desc">結合能量頻率的新生命祝福，單次服務</p>
+            </div>
+            <div class="card-value"><span>TWD</span>2,000</div>
         </div>
-        <div class="price-item">
-            <div class="price-name">E. 紫微命盤家宅風水調整 / 新宅格局優化<span>格局分析 + 能量化煞催旺佈局 / 完整風水報告</span></div>
-            <div class="price-value">TWD 3666~8888 </div>
+    </div>
+
+    <div id="fengshui" class="price-content">
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【安居基礎】空間能量校準</h3>
+                <p class="card-desc">外局定向分析、內局化煞、紫微風水命主位強化</p>
+            </div>
+            <div class="card-value"><span>TWD</span>3,666</div>
         </div>
-        <div class="price-item">
-            <div class="price-name">F. 生命起名 / 改名<span>單次服務</span></div>
-            <div class="price-value">TWD 2,000</div>
+        <div class="price-card featured">
+            <span class="featured-badge">人氣首選</span>
+            <div class="card-info">
+                <h3 class="card-title">【和諧生活】格局全方位優化</h3>
+                <p class="card-desc">包含基礎方案，加入夫妻兩人佈局、厨房及衛浴的内局調整與水晶強化</p>
+            </div>
+            <div class="card-value"><span>TWD</span>4,888</div>
         </div>
-        <div class="price-item">
-            <div class="price-name">G. 靈氣療癒 / 單次<span>單次服務(多次服務套餐優惠另外咨詢)/遠程/實體 / 30~90 min</span></div>
-            <div class="price-value">TWD 999~1399</div>
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【金榜提名】文昌儀式佈局</h3>
+                <p class="card-desc">包含基礎方案，深度文昌位佈置（生年/流年/宅位）與正式催文昌儀式</p>
+            </div>
+            <div class="card-value"><span>TWD</span>9,888</div>
         </div>
-        <div class="price-item">
-            <div class="price-name">H. 深度療癒與長期專案<span>靈氣 / 包年 / 優惠</span></div>
-            <div class="price-value">私訊詢價</div>
+          <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【紅鸞人緣】桃花與關係和諧</h3>
+                <p class="card-desc">包含基礎方案，並加入桃花位/人緣位催旺佈局（生年/流年/宅位）。</p>
+            </div>
+            <div class="card-value"><span>TWD</span>9,888</div>
+        </div>
+         <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【紅鸞人緣】桃花與關係和諧</h3>
+                <p class="card-desc">包含基礎方案，並加入桃花位/人緣位催旺佈局（生年/流年/宅位）。</p>
+            </div>
+            <div class="card-value"><span>TWD</span>9,888</div>
+        </div>
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【青雲直上】事業權力與金榜佈局</h3>
+                <p class="card-desc">包含基礎方案，專項打造「事業/權力局」，辦公/書房格局深度優化（生年/流年/宅位）</p>
+            </div>
+            <div class="card-value"><span>TWD</span>9,888</div>
+        </div>
+          <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【豐盛萬象】全方位財庫與大運佈局</h3>
+                <p class="card-desc">最完整服務，包含「三元納氣」全屋深度分析（門、衛、廚、臥、書房），（生年/流年/宅位），全方位能量調整</p>
+            </div>
+            <div class="card-value"><span>TWD</span>16,888</div>
+        </div>
+    </div>
+
+    <div id="reiki" class="price-content">
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【聖火撫慰】臼井聖火®療癒</h3>
+                <p class="card-desc">快速釋放日常瑣碎壓力，清理腦霧與焦慮 (30-45min)</p>
+            </div>
+            <div class="card-value"><span>TWD</span>999</div>
+        </div>
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【豐盛對頻】金錢靈氣專項</h3>
+                <p class="card-desc">清理對金錢的匱乏信念，將頻率對焦至豐盛軌道 (30-45min)</p>
+            </div>
+            <div class="card-value"><span>TWD</span>1,111</div>
+        </div>
+        <div class="price-card featured">
+            <div class="card-info">
+                <h3 class="card-title">【深度喚醒】臼井聖火®療癒和能量清理</h3>
+                <p class="card-desc">深度身心Spa，融化積壓的情緒負擔，清理附著在身上的負能量 (60-90min)</p>
+            </div>
+            <div class="card-value"><span>TWD</span>1,399</div>
+        </div>
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">深度療癒與長期守護專案</h3>
+                <p class="card-desc">針對特定生命課題的靈氣包年或長期能量調理</p>
+            </div>
+            <div class="card-value">私訊詢價</div>
+        </div>
+    </div>
+
+    <div id="guidance" class="price-content">
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【一念明晰】單題直覺透析</h3>
+                <p class="card-desc">針對目前單一困擾的快速洞察與能量斷捨離 (15-20min)</p>
+            </div>
+            <div class="card-value"><span>TWD</span>299</div>
+        </div>
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【月影伴隨】對焦組合 (3次)</h3>
+                <p class="card-desc">不限期使用，適合處於變動期、需要頻繁回頭對焦的夥伴</p>
+            </div>
+            <div class="card-value"><span>TWD</span>799（原價：897）</div>
+        </div>
+        <div class="price-card featured">
+            <div class="card-info">
+                <h3 class="card-title">【知命見行】紫微 + 牌卡解碼</h3>
+                <p class="card-desc">大限流年生命格局 + 當下行動的直覺收網組合價</p>
+            </div>
+            <div class="card-value"><span>TWD</span>1,588（原價：1698）</div>
+        </div>
+        <div class="price-card">
+            <div class="card-info">
+                <h3 class="card-title">【靈魂導師】靈氣 + 牌卡解析</h3>
+                <p class="card-desc">先修復頻率再傾聽直覺，獲得最純淨精準的引導訊息</p>
+            </div>
+            <div class="card-value"><span>TWD</span>1,199 ~ 1,588（原價：1,298 ~ 1,698）</div>
         </div>
     </div>
 </div>
