@@ -265,22 +265,22 @@
         <div class="intro-card">
             <h3>紫微斗數諮詢：生命地圖的解碼與導航</h3>
             <p>透過星盤的精密排列，我們不只是在看「宿命」，而是在解讀妳專屬的生命藍圖。從性格天賦、人際關係到流年運勢的起伏，我將陪伴妳釐清目前的生命課題，幫助妳在人生的十字路口學習如何「順勢而為」，找到最自在的發揮空間。</p>
-            <a href="#pricing" class="jump-link">探索妳的生命藍圖</a>
+            <a href="javascript:void(0)" onclick="jumpToTab('ziwei')" class="jump-link">探索妳的生命藍圖</a>
         </div>
         <div class="intro-card">
             <h3>臼井聖火®靈氣 (Usui Holy Fire® Reiki)</h3>
             <p>臼井聖火靈氣是一種高頻且精微的能量療癒方式。透過宇宙光能量的傳遞，溫柔地融化積壓在身心的情緒負擔與疲乏。在這一小時的能量沐浴中，我們將進行深層的能量清理與脈輪平衡，幫助妳在繁忙的都市步調中，找回靈魂久違的平靜與內在韌性。</p>
-            <a href="#pricing" class="jump-link">感受靈魂的洗滌</a>
+            <a href="javascript:void(0)" onclick="jumpToTab('reiki')" class="jump-link">感受靈魂的洗滌</a>
         </div>
         <div class="intro-card">
             <h3>豐盛金錢靈氣 (Money Reiki)</h3>
             <p>豐盛不只是帳戶裡的數字，更是一種與物質世界的和諧關係。這項服務專注於清理潛意識中對「匱乏」的恐懼，並轉化阻礙財富流動的陳舊信念。透過能量的調整與祝福，協助妳的頻率對準豐盛，吸引符合妳最高利益的機會、資源與財富能量進入生活。</p>
-            <a href="#pricing" class="jump-link">開啟豐盛的能量流動</a>
+           <a href="javascript:void(0)" onclick="jumpToTab('reiki')" class="jump-link">開啟豐盛的能量流動</a>
         </div>
         <div class="intro-card">
             <h3>牌卡占卜：當下的直覺洞察</h3>
             <p>當妳感到迷惘、需要一個明確的出口或建議時，牌卡是妳與潛意識對話的最佳橋樑。結合塔羅的直覺洞悉與紫微牌卡的生命智慧，我們針對具體問題進行深度剖析，為妳撥開迷霧，看清當下的能量流向，並提供具體可行的行動指引。</p>
-            <a href="#pricing" class="jump-link">撥開當下的迷霧</a>
+            <a href="javascript:void(0)" onclick="jumpToTab('guidance')" class="jump-link">撥開當下的迷霧</a>
         </div>
     </div>
 </div>
@@ -294,7 +294,6 @@
         <button class="tab-btn" onclick="openTab(event, 'reiki')">能量療癒</button>
         <button class="tab-btn" onclick="openTab(event, 'guidance')">直覺指引</button>
     </div>
-
     <div id="ziwei" class="price-content active">
         <div class="price-card">
             <div class="card-info">
@@ -483,6 +482,7 @@
 </style>
 
 <script>
+    // 基礎切換功能
     function openTab(evt, tabName) {
         var i, content, tablinks;
         content = document.getElementsByClassName("price-content");
@@ -495,14 +495,28 @@
             tablinks[i].classList.remove("active");
         }
         var activeTab = document.getElementById(tabName);
-        if (activeTab) {
+        if(activeTab) {
             activeTab.style.display = "flex";
             activeTab.classList.add("active");
-            evt.currentTarget.classList.add("active");
+            if(evt) evt.currentTarget.classList.add("active");
+        }
+    }
+
+    // ✨ 專屬跳轉函數：自動捲動並自動切換分頁
+    function jumpToTab(tabName) {
+        // 1. 捲動到定價區塊
+        const pricingSection = document.getElementById('pricing');
+        pricingSection.scrollIntoView({ behavior: 'smooth' });
+
+        // 2. 找到對應的按鈕並模擬點擊
+        const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+        if (targetBtn) {
+            setTimeout(() => {
+                targetBtn.click();
+            }, 300); // 稍微延遲讓捲動更流暢
         }
     }
 </script>
-
 <div class="section" id="social" style="text-align: center;">
     <h2 class="section-title">與我連結</h2>
     <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px;">
