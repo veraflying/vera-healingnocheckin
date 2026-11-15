@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>服務與預約｜微辣療癒不打卡</title>
+<meta name="description" content="紫微斗數諮詢、靈氣療癒與臼井聖火靈氣課程的費用，可直接在頁面上填預約單。">
+<meta property="og:title" content="服務與預約｜微辣療癒不打卡">
+<meta property="og:description" content="紫微斗數諮詢、靈氣療癒與臼井聖火靈氣課程的費用，可直接在頁面上填預約單。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">療癒不打卡</a>
+  <nav class="nav" aria-label="主選單"><a href="./">首頁</a><a href="about.html">關於與評價</a><a href="services.html" aria-current="page">服務與預約</a><a href="faq.html">問與答</a></nav>
+</div></header>
+<main>
+
+<section class="band dot"><div class="wrap">
+  <h1>服務與預約</h1>
+  <p class="mute">費用是新台幣。點「加入預約單」就能直接在這一頁下單，可以一次選多項。</p>
+  <div class="shop">
+    <div class="stack" style="max-width:none">
+      <div class="tabs" role="tablist" aria-label="服務分類" id="tabs"></div>
+      <div class="group" id="menu" role="tabpanel"></div>
+    </div>
+    <div class="side stack" style="max-width:none" id="order">
+      <h2>預約單</h2>
+      <div class="order">
+        <ul class="picked" id="picked"></ul>
+        <p class="total"><span>合計</span><b id="total">0</b></p>
+        <div class="fields">
+          <label for="oName">怎麼稱呼你<input id="oName" type="text" autocomplete="nickname"></label>
+          <label for="oLine">你的 LINE 名稱<input id="oLine" type="text"></label>
+        </div>
+        <label for="oTime">方便的時段<input id="oTime" type="text" placeholder="例：平日晚上、週六早上"></label>
+        <label for="oNote">想先讓我知道的事<textarea id="oNote" placeholder="例：最想解決的一件事"></textarea></label>
+        <div class="summary" id="summary" tabindex="0"></div>
+        <div class="row">
+          <button class="btn" id="copy" type="button">複製預約單</button>
+          <a class="btn quiet" href="https://lin.ee/IuBJs3j" target="_blank" rel="noopener">打開 LINE 貼上</a>
+        </div>
+        <p class="fine" id="copyMsg" role="status"></p>
+        <p class="fine">貼到 LINE @834lrumm 之後，我會在 1–2 個工作天內跟你確認時間與付款方式。確認之前不會收費。</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band pink sprig-r reveal"><div class="wrap">
+  <h2>預約流程</h2>
+  <ol class="how">
+    <li>選好服務，填預約單，複製後貼到 LINE。</li>
+    <li>我用 LINE 跟你確認時間、費用與付款方式。</li>
+    <li>付款後我開始看盤。紫微類服務會請你先做<a href="check/">命盤自我檢查</a>，省去來回問資料。</li>
+  </ol>
+  <p class="fine">不習慣這樣下單，也可以填<a href="https://forms.gle/MWyL1mT33U6HLFRHA" target="_blank" rel="noopener">服務預約表單</a>。個案取消或改期請提前 24 小時告知；工作坊請提前 3 天。</p>
+</div></section>
+<div class="bar" id="bar" hidden><a href="#order"><span id="barText"></span><span>去填預約單 →</span></a></div>
+
+</main>
+<footer><div class="wrap">
+  <p class="social">
+    <a href="https://lin.ee/IuBJs3j" target="_blank" rel="noopener">LINE @834lrumm</a>
+    <a href="https://www.threads.com/@vera_healingnocheckin" target="_blank" rel="noopener">Threads</a>
+    <a href="https://www.instagram.com/vera_healingnocheckin" target="_blank" rel="noopener">Instagram</a>
+  </p>
+  <p class="fine">靈氣療癒為能量輔助方式，無法取代專業醫療診斷與治療。紫微斗數為自我了解的參考，不能取代心理、法律或財務專業協助。評價為個人感受，每個人的體驗不同。</p>
+  <p class="fine">在繁華中靜心 · 微辣療癒不打卡</p>
+</div></footer>
+<script src="order.js"></script>
+<script>
+(function(){
+  if(!("IntersectionObserver" in window)) return;
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove("pre");io.unobserve(e.target);}});},{threshold:.08});
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(el){
+    if(el.getBoundingClientRect().top>window.innerHeight*0.9){el.classList.add("pre");io.observe(el);}
+  });
+})();
+</script>
+</body>
+</html>

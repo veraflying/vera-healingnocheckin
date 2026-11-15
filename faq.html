@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>問與答｜微辣療癒不打卡</title>
+<meta name="description" content="關於出生時間、靈氣、上課方式與流年詳批的常見問題。">
+<meta property="og:title" content="問與答｜微辣療癒不打卡">
+<meta property="og:description" content="關於出生時間、靈氣、上課方式與流年詳批的常見問題。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">療癒不打卡</a>
+  <nav class="nav" aria-label="主選單"><a href="./">首頁</a><a href="about.html">關於與評價</a><a href="services.html">服務與預約</a><a href="faq.html" aria-current="page">問與答</a></nav>
+</div></header>
+<main>
+
+<section class="band sprig-r"><div class="wrap">
+  <h1>問與答</h1>
+  <div class="faq">
+    <details open><summary>我不確定出生時間，可以看嗎？</summary><p>時辰不確定的話，盤會差很多，我不想用猜的幫你看。可以先問問家人或查出生證明。真的查不到也沒關係，跟我說一聲，我們再看怎麼做比較適合。</p></details>
+    <details><summary>靈氣要相信才有用嗎？</summary><p>不用信什麼，手放著、慢慢呼吸就好。我自己一開始也很懷疑。靈氣是陪伴和放鬆，不能取代看醫生。</p></details>
+    <details><summary>是線上還是面對面？</summary><p>紫微諮詢是線上，住哪裡都可以。靈氣個案有遠距和實體兩種。</p></details>
+    <details><summary>你有開哪些課？</summary><p>目前教授的是臼井聖火靈氣課程，包含入門工作坊和一二階，以實體小班進行，地點在桃園。</p></details>
+    <details><summary>2027 流年詳批可以單獨買嗎？</summary><p>流年詳批是個案基本諮詢的加購項目，需要搭配個案基本諮詢一起預約。先看懂你的盤，流年才看得準。</p></details>
+    <details><summary>你會告訴我該不該離職或分手嗎？</summary><p>我不會替你決定。我會告訴你命盤上看到的模式、今年要注意的地方，還有你可以怎麼檢查自己的選擇。</p></details>
+  </div>
+</div></section>
+
+<section class="band lilac rings-r reveal"><div class="wrap">
+  <h2>還有其他問題</h2>
+  <p>直接在 LINE 問我就好，我會在 1–2 個工作天內回覆。</p>
+  <div class="row">
+    <a class="btn" href="https://lin.ee/IuBJs3j" target="_blank" rel="noopener">加 LINE @834lrumm</a>
+    <a class="btn quiet" href="services.html">看服務與預約</a>
+  </div>
+</div></section>
+
+</main>
+<footer><div class="wrap">
+  <p class="social">
+    <a href="https://lin.ee/IuBJs3j" target="_blank" rel="noopener">LINE @834lrumm</a>
+    <a href="https://www.threads.com/@vera_healingnocheckin" target="_blank" rel="noopener">Threads</a>
+    <a href="https://www.instagram.com/vera_healingnocheckin" target="_blank" rel="noopener">Instagram</a>
+  </p>
+  <p class="fine">靈氣療癒為能量輔助方式，無法取代專業醫療診斷與治療。紫微斗數為自我了解的參考，不能取代心理、法律或財務專業協助。評價為個人感受，每個人的體驗不同。</p>
+  <p class="fine">在繁華中靜心 · 微辣療癒不打卡</p>
+</div></footer>
+
+<script>
+(function(){
+  if(!("IntersectionObserver" in window)) return;
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove("pre");io.unobserve(e.target);}});},{threshold:.08});
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(el){
+    if(el.getBoundingClientRect().top>window.innerHeight*0.9){el.classList.add("pre");io.observe(el);}
+  });
+})();
+</script>
+</body>
+</html>

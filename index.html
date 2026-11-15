@@ -1,317 +1,74 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>療癒不打卡的命理師微辣 | Vera Healing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary-purple: #ce93d8; 
-            --soft-pink: #f8bbd0;     
-            --deep-purple: #7b1fa2;    
-            --text-gray: #444;
-            --bg-light: #ffffff;
-            --section-bg: #fdfbff;
-        }
-
-        body { 
-            font-family: 'Noto Sans TC', sans-serif; 
-            margin: 0; color: var(--text-gray); 
-            background-color: var(--bg-light); 
-            line-height: 1.8;
-            scroll-behavior: smooth;
-        }
-
-        /* --- ✨ 質感大氣 Hero Section --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=2000') center/cover no-repeat;
-            background-attachment: scroll; 
-            color: white;
-            padding: 0 20px;
-        }
-
-        .hero h1 { font-size: 3.5rem; color: #ffffff; margin-bottom: 24px; letter-spacing: 8px; font-weight: 700; text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6); white-space: nowrap; }
-        .hero p { font-size: 1.2rem; color: rgba(255, 255, 255, 0.9); max-width: 750px; margin-bottom: 45px; font-weight: 300; letter-spacing: 2px; text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); }
-        .hero .btn-start { color: #ffffff; text-decoration: none; font-size: 1rem; border: 1px solid rgba(255, 255, 255, 0.8); padding: 14px 55px; border-radius: 2px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px); transition: all 0.3s ease; letter-spacing: 3px; }
-        .hero .btn-start:hover { background: #ffffff; color: #1a1a2e; }
-
-        .nav { text-align: center; padding: 25px 0; background: white; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: center; gap: 40px; }
-        .nav a { text-decoration: none; color: #555; font-size: 1.15rem; font-weight: 500; letter-spacing: 2px; transition: 0.3s; }
-        .nav a:hover { color: var(--deep-purple); }
-
-        .floating-btn { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #06C755, #05a346); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3); z-index: 9999; text-decoration: none; transition: 0.3s; }
-
-        .section { max-width: 1100px; margin: auto; padding: 100px 20px; }
-        h2.section-title { text-align: center; color: var(--deep-purple); margin-bottom: 60px; font-weight: 700; font-size: 2rem; }
-
-        .about-box { background: var(--section-bg); padding: 50px; border-radius: 30px; display: flex; align-items: flex-start; gap: 50px; border-right: 8px solid var(--primary-purple); }
-        .about-photo { flex: 0 0 200px; text-align: center; }
-        .about-photo img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid var(--soft-pink); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .about-text { flex: 1; font-size: 0.95rem; color: #444; line-height: 2; }
-
-        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .intro-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); transition: 0.3s; }
-        .intro-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(123, 31, 162, 0.05); }
-        .intro-card h3 { color: var(--deep-purple); border-left: 4px solid var(--soft-pink); padding-left: 15px; margin-bottom: 15px; font-size: 1.25rem; }
-        .intro-card p { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
-        .jump-link { color: var(--deep-purple); text-decoration: none; font-weight: bold; font-size: 1rem; border-bottom: 2px solid var(--soft-pink); transition: 0.3s; cursor: pointer; }
-
-        #pricing { background-color: var(--section-bg); }
-        .tab-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 45px; flex-wrap: wrap; }
-        .tab-btn { padding: 12px 28px; border-radius: 50px; border: 1.5px solid var(--primary-purple); background: white; color: var(--deep-purple); cursor: pointer; font-weight: bold; transition: 0.3s; letter-spacing: 1.5px; font-size: 1rem; }
-        .tab-btn.active { background: var(--deep-purple); color: white; border-color: var(--deep-purple); box-shadow: 0 4px 15px rgba(123, 31, 162, 0.2); }
-
-        .price-content { display: none; flex-direction: column; gap: 20px; animation: fadeIn 0.4s ease; }
-        .price-content.active { display: flex; }
-
-        .price-card { background: white; padding: 35px 45px; border-radius: 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 30px rgba(0,0,0,0.04); transition: 0.3s; position: relative; border: 1px solid #f0f0f0; }
-        .price-card:hover { transform: translateY(-5px); border-color: var(--soft-pink); box-shadow: 0 15px 35px rgba(123, 31, 162, 0.08); }
-        .price-card.featured { border: 2px solid var(--primary-purple); background: #fdfbff; }
-        .featured-badge { position: absolute; top: 0; right: 0; background: var(--deep-purple); color: white; padding: 5px 18px; font-size: 0.75rem; font-weight: bold; border-bottom-left-radius: 18px; }
-
-        .card-info { flex: 2; }
-        .card-title { font-size: 1.4rem; font-weight: 700; color: var(--deep-purple); margin: 0 0 10px 0; letter-spacing: 1px; }
-        .card-desc { font-size: 1rem; color: #666; line-height: 1.6; max-width: 90%; }
-        .card-value { flex: 1; text-align: right; color: var(--deep-purple); font-weight: 700; font-size: 1.8rem; line-height: 1.2; }
-        .card-value span { font-size: 0.9rem; margin-right: 5px; color: #999; }
-
-        footer { text-align: center; padding: 60px; color: #ccc; font-size: 0.85rem; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.6rem; letter-spacing: 3px; white-space: nowrap; }
-            .about-box { flex-direction: column; align-items: center; padding: 30px 20px; gap: 30px; }
-            .about-text { text-align: left; width: 100%; }
-            .intro-grid { grid-template-columns: 1fr; }
-            .price-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 30px; }
-            .card-value { text-align: left; width: 100%; border-top: 1px solid #eee; padding-top: 15px; font-size: 1.6rem; }
-            .nav { gap: 15px; padding: 15px 0; }
-            .nav a { font-size: 0.95rem; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>微辣｜療癒不打卡</title>
+<meta name="description" content="微辣的紫微斗數諮詢與臼井聖火靈氣。先看懂自己，再把它鬆開。">
+<meta property="og:title" content="微辣｜療癒不打卡">
+<meta property="og:description" content="微辣的紫微斗數諮詢與臼井聖火靈氣。先看懂自己，再把它鬆開。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">療癒不打卡</a>
+  <nav class="nav" aria-label="主選單"><a href="./" aria-current="page">首頁</a><a href="about.html">關於與評價</a><a href="services.html">服務與預約</a><a href="faq.html">問與答</a></nav>
+</div></header>
+<main>
 
-<a href="https://lin.ee/IuBJs3j" target="_blank" class="floating-btn" title="立即私訊預約">
-    <i class="fa-regular fa-comment-dots"></i>
-</a>
+<section class="band hello sprig-r dot"><div class="wrap">
+  <div class="portrait-wrap"><img class="portrait" src="portrait.jpg" alt="微辣在窗邊微笑" width="440" height="550"></div>
+  <h1>嗨，我是微辣。</h1>
+  <div class="stack">
+    <p>兩個孩子的媽，白天上班，下班後幫人看紫微斗數、做靈氣。</p>
+    <p>我做的事情很簡單：先用命盤看懂你為什麼老是卡在同一個地方，再用靈氣陪你把它鬆開。</p>
+  </div>
+  <div class="row">
+    <a class="btn" href="services.html">看服務與預約</a>
+    <a class="btn quiet" href="check/">先做 2027 命盤自我檢查</a>
+  </div>
+</div></section>
 
-<section class="hero">
-    <h1>療癒不打卡的命理師微辣</h1>
-    <p>在星辰與能量間尋找平衡，以理性的星盤對話感性的靈魂，<br>陪你梳理生命的每一份遇見。</p>
-    <a href="#about" class="btn-start">探索微辣空間</a>
-</section>
+<section class="band pink rings-l"><div class="wrap">
+  <h2>想先看哪一頁？</h2>
+  <div class="doors">
+    <a class="door" href="about.html"><span class="no">1</span><b>關於與評價</b><span class="d">我是誰、怎麼做事，還有來過的人怎麼說。</span><span class="go" aria-hidden="true">→</span></a>
+    <a class="door" href="services.html"><span class="no">2</span><b>服務與預約</b><span class="d">看費用，直接在頁面上選服務、填預約單。</span><span class="go" aria-hidden="true">→</span></a>
+    <a class="door" href="faq.html"><span class="no">3</span><b>問與答</b><span class="d">不確定時辰、靈氣要不要相信、線上或實體。</span><span class="go" aria-hidden="true">→</span></a>
+    <a class="door" href="check/"><span class="no">4</span><b>命盤自我檢查</b><span class="d">十分鐘排盤加十題，看看你今年卡在哪裡。</span><span class="go" aria-hidden="true">→</span></a>
+  </div>
+</div></section>
 
-<div class="nav">
-    <a href="#about">關於初衷</a>
-    <a href="#intro">項目介紹</a>
-    <a href="#pricing">服務收費</a>
-    <a href="javascript:void(0)" onclick="jumpToTab('stardust')">光隱水晶</a>
-    <a href="#social">預約諮詢</a>
-</div>
+<section class="band sprig-l reveal"><div class="wrap">
+  <h2>來過的人這樣說</h2>
+  <p class="quote">「很能夠一下就搓中要點，有種豁然開朗的感覺。」</p>
+  <p class="mute">紫微斗數諮詢的回饋。<a href="about.html#voices">看更多評價</a></p>
+</div></section>
 
-<div class="section" id="about">
-    <h2 class="section-title">我的初衷</h2>
-    <div class="about-box">
-        <div class="about-photo">
-            <img src="profile.png" alt="Vera">
-        </div>
-        <div class="about-text">
-            <p>
-                <br><strong>我的初衷：在繁雜日常中，陪你看見靈魂的光影</strong><br><br>
-                <strong>「在高效的邏輯背後，我也曾是那個在瑣事中失焦的人。」</strong><br><br>
-                在職業生涯中，我是大型企業裡習慣 996 節奏、追求極致效率的主管。我曾深信邏輯與數字能解決世上所有的難題。但在脫下西裝後，我同時也是一位妻子，以及兩個孩子的母親。<br><br>
-                生活並不總是溫柔的。在管理團隊、處理家庭矛盾、擔憂孩子健康、以及平衡職場壓力的夾縫中，我也曾感到無盡的煩心與疲憊。那種被生活推著走、逐漸失去自我的窒息感，我懂。<br><br>
-                <strong>「學會向內看，是送給自己最好的禮物。」</strong><br><br>
-                正是在這些「煩心」的磨練中，我遇見了星辰與能量。我發現，當我們學會放下外在的喧囂，轉而向內看時，那些卡住的邏輯才會鬆動，真正的平靜才會緩緩升起。<br><br>
-                透過紫微斗數的生命地圖與臼井聖火靈氣的溫柔撫慰，我找回了在理性職場與感性生活間的平衡。我學會了靜心觀察，學會了捕捉大自然不期而遇的美好，並將這份平靜帶回我的家庭與工作中。<br><br>
-                <strong>「我不專屬你的諮詢師，更是與你並肩前行的夥伴。」</strong><br><br>
-                我的初衷很簡單：我想幫助那些同樣在多重身份中感到迷惘的你。我不只提供精準的星盤解讀或能量清理，更想分享一套「在亂世中靜心」的方法。讓我們一起學習，在不打卡的療癒時光裡，找回那份本自具足的豐盛與平靜。
-            </p>
-        </div>
-    </div>
-</div>
-
-<div class="section" id="credentials" style="padding-top: 0;">
-    <h2 class="section-title">專業資歷 / Credentials</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; text-align: center;">
-        <div class="about-box" style="display: block; padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
-                <i class="fa-solid fa-hand-sparkles" style="font-size: 1.8rem; color: var(--deep-purple);"></i>
-                <h3 style="color: var(--deep-purple); margin: 0; font-size: 1.3rem;">能量療癒</h3>
-            </div>
-            <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #666; text-align: left; display: inline-block;">
-                <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>臼井聖火®靈氣二階認證</li>
-                <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>金錢靈氣大師階 - in progress</li>
-            </ul>
-        </div>
-        <div class="about-box" style="display: block; padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
-                <i class="fa-solid fa-moon" style="font-size: 1.8rem; color: var(--deep-purple);"></i>
-                <h3 style="color: var(--deep-purple); margin: 0; font-size: 1.3rem;">命理諮詢</h3>
-            </div>
-            <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #666; text-align: left; display: inline-block;">
-                <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>紫微斗數及風水專業諮詢認證</li>
-                <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>紫靈牌卡解讀 </li>
-            </ul>
-        </div>
-        <div class="about-box" style="display: block; padding: 30px; border-right: none; border-bottom: 8px solid var(--primary-purple); border-radius: 20px;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px;">
-                <i class="fa-solid fa-briefcase" style="font-size: 1.8rem; color: var(--deep-purple);"></i>
-                <h3 style="color: var(--deep-purple); margin: 0; font-size: 1.3rem;">社會履歷</h3>
-            </div>
-            <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #666; text-align: left; display: inline-block;">
-                <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>大型企業主管</li>
-                <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>邏輯整合與決策分析</li>
-                <li style="margin-bottom: 8px;"><i class="fa-solid fa-check" style="color: var(--soft-pink); margin-right: 8px;"></i>女性領導力與職場平衡實踐</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div class="section" id="intro">
-    <h2 class="section-title">療癒項目介紹</h2>
-    <div class="intro-grid">
-        <div class="intro-card">
-            <h3>紫微斗數：生命地圖與導航</h3>
-            <p>透過星盤精密解讀你的生命藍圖。從性格天賦到流年運勢，幫助你在人生的十字路口找到最自在的發揮空間。</p>
-            <a onclick="jumpToTab('ziwei')" class="jump-link">探索你的生命藍圖</a>
-        </div>
-        <div class="intro-card">
-            <h3>家宅風水：場域能量化煞催吉</h3>
-            <p>環境是你內在頻率的延伸。透過空間校準，打造支撐你成長的能量堡壘，優化桃花人緣與事業決策格局。</p>
-            <a onclick="jumpToTab('fengshui')" class="jump-link">校準你的空間頻率</a>
-        </div>
-        <div class="intro-card">
-            <h3>靈氣療癒：個人能量調頻與療癒</h3>
-            <p>高頻且精微的能量傳遞。溫柔融化積壓在身心的情緒負擔，在繁忙都市步調中，找回靈魂久違的平靜。</p>
-            <a onclick="jumpToTab('reiki')" class="jump-link">感受靈魂的洗滌</a>
-        </div>
-        <div class="intro-card">
-            <h3>牌卡占卜：當下的直覺洞察</h3>
-            <p>當你感到迷惘時，結合塔羅智慧與紫微邏輯，為你撥開當下的迷霧，看清能量流向並獲得行動指引。</p>
-            <a onclick="jumpToTab('guidance')" class="jump-link">撥開當下的迷霧</a>
-        </div>
-        <div class="intro-card">
-            <h3>光隱水晶：環境與體感能量陪伴</h3>
-            <p>精心挑選的高頻水晶，透過手串或擺件將能量融入日常生活。讓 Stardust 成為你的體感護身符與意圖加速器。</p>
-            <a onclick="jumpToTab('stardust')" class="jump-link">挑選你的 Stardust</a>
-        </div>
-    </div>
-</div>
-
-<div class="section" id="pricing">
-    <h2 class="section-title">服務收費 / Pricing</h2>
-    <div class="tab-container">
-        <button class="tab-btn active" data-tab="ziwei" onclick="openTab(event, 'ziwei')">紫微導航</button>
-        <button class="tab-btn" data-tab="fengshui" onclick="openTab(event, 'fengshui')">家宅風水</button>
-        <button class="tab-btn" data-tab="reiki" onclick="openTab(event, 'reiki')">能量療癒</button>
-        <button class="tab-btn" data-tab="guidance" onclick="openTab(event, 'guidance')">直覺指引</button>
-        <button class="tab-btn" data-tab="stardust" onclick="openTab(event, 'stardust')">星塵水晶</button>
-    </div>
-
-    <div id="ziwei" class="price-content active">
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【探索自我】個案基本諮詢</h3><p class="card-desc">專注個人命盤與流年指引 (40-60min)</p></div><div class="card-value"><span>TWD</span>1,399</div></div>
-        <div class="price-card featured"><span class="featured-badge">推薦方案</span><div class="card-info"><h3 class="card-title">【關係導航】個案 + 合盤</h3><p class="card-desc">個人深度解析 + 關係攻略加購 (70-100min)</p></div><div class="card-value"><span>TWD</span>2,698</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【雙人同行】全效合盤</h3><p class="card-desc">包含兩位完整命盤解析 + 深度關係合盤 (110-160min)</p></div><div class="card-value"><span>TWD</span>4,999</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【生命祝福】專業起名/改名</h3><p class="card-desc">結合能量頻率的新生命祝福，單次服務</p></div><div class="card-value"><span>TWD</span>2,000</div></div>
-    </div>
-
-    <div id="fengshui" class="price-content">
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【安居基礎】空間能量校準</h3><p class="card-desc">外局定向分析、內局化煞、紫微風水命主位強化</p></div><div class="card-value"><span>TWD</span>3,666</div></div>
-        <div class="price-card featured"><span class="featured-badge">人氣首選</span><div class="card-info"><h3 class="card-title">【和諧生活】格局全方位優化</h3><p class="card-desc">包含基礎方案，加入夫妻兩人佈局、厨房及衛浴的内局調整與水晶強化</p></div><div class="card-value"><span>TWD</span>4,888</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【金榜提名】文昌學業佈局</h3><p class="card-desc">包含基礎方案，深度文昌位佈置（生年/流年/宅位）與正式催文昌儀式</p></div><div class="card-value"><span>TWD</span>9,888</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【紅鸞人緣】桃花與關係和諧</h3><p class="card-desc">包含基礎方案，並加入桃花位/人緣位催旺佈局（生年/流年/宅位）</p></div><div class="card-value"><span>TWD</span>9,888</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【青雲直上】事業權力與金榜佈局</h3><p class="card-desc">包含基礎方案，專項打造「事業局」，辦公/書書格局深度優化</p></div><div class="card-value"><span>TWD</span>9,888</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【豐盛萬象】全方位財庫與大運佈局</h3><p class="card-desc">包含「三元納氣」全屋深度分析，全方位能量調整</p></div><div class="card-value"><span>TWD</span>16,888</div></div>
-    </div>
-
-    <div id="reiki" class="price-content">
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【聖火撫慰】臼井聖火®療癒</h3><p class="card-desc">快速釋放日常壓力，清理腦霧與焦慮 (30-45min)</p></div><div class="card-value"><span>TWD</span>999</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【豐盛對頻】金錢靈氣專項</h3><p class="card-desc">清理對金錢的匱乏信念，對焦豐盛軌道 (30-45min)</p></div><div class="card-value"><span>TWD</span>1,111</div></div>
-        <div class="price-card featured"><div class="card-info"><h3 class="card-title">【深度喚醒】療癒和能量清理</h3><p class="card-desc">深度身心Spa，融化積壓的情緒負擔，清理負能量 (60-90min)</p></div><div class="card-value"><span>TWD</span>1,399</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">深度療癒與長期守護專案</h3><p class="card-desc">針對特定課題的靈氣包年或長期能量調理</p></div><div class="card-value">私訊詢價</div></div>
-    </div>
-
-    <div id="guidance" class="price-content">
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【一念明晰】單題直覺透析</h3><p class="card-desc">針對目前單一困擾的快速洞察與能量斷捨離 (15-20min)</p></div><div class="card-value"><span>TWD</span>299</div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【月影伴隨】對焦組合 (3次)</h3><p class="card-desc">不限期使用，適合處於變動期、需要頻繁回頭對焦者</p></div><div class="card-value"><span>TWD</span>799<br><small style="font-size:0.7rem; color:#999;">（原價：897）</small></div></div>
-        <div class="price-card featured"><div class="card-info"><h3 class="card-title">【知命見行】紫微 + 牌卡解碼</h3><p class="card-desc">大限流年生命格局 + 當下行動的直覺收網組合價</p></div><div class="card-value"><span>TWD</span>1,588<br><small style="font-size:0.7rem; color:#999;">（原價：1698）</small></div></div>
-        <div class="price-card"><div class="card-info"><h3 class="card-title">【靈魂導師】靈氣 + 牌卡解析</h3><p class="card-desc">先修復頻率再傾聽直覺，獲得最純淨精準的引導訊息</p></div><div class="card-value"><span>TWD</span>1,199 ~ 1,588</div></div>
-    </div>
-
-    <div id="stardust" class="price-content">
-        <div class="price-card featured">
-            <span class="featured-badge">光隱水晶 | Stardust Selection</span>
-            <div class="card-info">
-                <h3 class="card-title">【晶石共振】專屬命定手串客製</h3>
-                <p class="card-desc">結合紫微命盤分析能量缺口，精選高頻原石進行意圖設定與靈氣淨化。</p>
-            </div>
-            <div class="card-value"><span>TWD</span>1,200起</div>
-        </div>
-        <div class="price-card">
-            <div class="card-info">
-                <h3 class="card-title">【原石校準】環境能量場域擺件</h3>
-                <p class="card-desc">嚴選白水晶簇、紫晶簇、黑曜石柱等環境校準原石，含基礎淨化套組。</p>
-            </div>
-            <div class="card-value"><span>TWD</span>1,000起</div>
-        </div>
-    </div>
-</div>
-
-<div class="section" id="social" style="text-align: center;">
-    <h2 class="section-title">與我連結</h2>
-    <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px;">
-        <a href="https://www.instagram.com/vera_healingnocheckin" target="_blank" style="color:#E1306C; font-size: 40px;"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.threads.net/@vera_healingnocheckin" target="_blank" style="color:#000; font-size: 40px;"><i class="fa-brands fa-threads"></i></a>
-        <a href="https://lin.ee/IuBJs3j" target="_blank" style="color:#06C755; font-size: 40px;"><i class="fa-regular fa-comment-dots"></i></a>
-    </div>
-</div>
-
-<footer>&copy; 2026 vera_healingnocheckin. 在繁華中靜心。</footer>
+</main>
+<footer><div class="wrap">
+  <p class="social">
+    <a href="https://lin.ee/IuBJs3j" target="_blank" rel="noopener">LINE @834lrumm</a>
+    <a href="https://www.threads.com/@vera_healingnocheckin" target="_blank" rel="noopener">Threads</a>
+    <a href="https://www.instagram.com/vera_healingnocheckin" target="_blank" rel="noopener">Instagram</a>
+  </p>
+  <p class="fine">靈氣療癒為能量輔助方式，無法取代專業醫療診斷與治療。紫微斗數為自我了解的參考，不能取代心理、法律或財務專業協助。評價為個人感受，每個人的體驗不同。</p>
+  <p class="fine">在繁華中靜心 · 微辣療癒不打卡</p>
+</div></footer>
 
 <script>
-    function openTab(evt, tabName) {
-        var i, content, tablinks;
-        content = document.getElementsByClassName("price-content");
-        for (i = 0; i < content.length; i++) {
-            content[i].style.display = "none";
-            content[i].classList.remove("active");
-        }
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active");
-        }
-        var activeTab = document.getElementById(tabName);
-        if(activeTab) {
-            activeTab.style.display = "flex";
-            activeTab.classList.add("active");
-            if(evt) evt.currentTarget.classList.add("active");
-        }
-    }
-
-    function jumpToTab(tabName) {
-        const pricingSection = document.getElementById('pricing');
-        pricingSection.scrollIntoView({ behavior: 'smooth' });
-        
-        // ✨ 修正點 3：確保 jumpToTab 能正確找到 data-tab 按鈕
-        const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
-        if (targetBtn) {
-            setTimeout(() => { targetBtn.click(); }, 300); 
-        }
-    }
+(function(){
+  if(!("IntersectionObserver" in window)) return;
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove("pre");io.unobserve(e.target);}});},{threshold:.08});
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(el){
+    if(el.getBoundingClientRect().top>window.innerHeight*0.9){el.classList.add("pre");io.observe(el);}
+  });
+})();
 </script>
-
 </body>
 </html>
