@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2027 命盤自我檢查</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* 版面：手機優先的四步精靈，一次只看一個畫面：生日、命盤、十題、結果。上方進度條，淺色單一主題，與個人網站同一套淡紫與蜜桃色。 */
+  color-scheme: light;
+  --night:#faf6fb;   /* 頁面底色 */
+  --panel:#ffffff;
+  --line:#e0d4ea;
+  --ink:#3b2a47;
+  --mute:#7a6d85;
+  --gold:#7a5a9a;    /* 強調色：梅紫 */
+  --font-display:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --font-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:linear-gradient(180deg,#f6eef9 0,#faf6fb 320px) var(--night);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.7}
+main{max-width:540px;margin:0 auto;padding:18px 16px 48px;display:flex;flex-direction:column;gap:18px}
+h1{font-family:var(--font-display);font-size:1.6rem;line-height:1.3;margin:0;text-wrap:balance}
+h2{font-family:var(--font-display);font-size:1.25rem;line-height:1.4;margin:0;text-wrap:balance}
+h3{font-size:1rem;margin:0}
+p{margin:0}
+[hidden]{display:none!important}
+.eyebrow{color:var(--mute);font-size:.82rem;letter-spacing:.12em}
+.mute{color:var(--mute)}
+.fine{font-size:.78rem;color:var(--mute)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button{font:inherit;cursor:pointer;color:inherit}
+
+/* 進度 */
+.progress{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.progress span{display:flex;flex-direction:column;gap:5px;font-size:.74rem;color:var(--mute)}
+.progress span::before{content:"";height:5px;border-radius:999px;background:#efe7f5;border:1px solid var(--line)}
+.progress span.on{color:var(--gold)}
+.progress span.on::before{background:var(--gold);border-color:var(--gold)}
+
+.step{display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--panel);border:1px solid var(--line);box-shadow:0 6px 20px rgba(122,90,154,.07);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:380px){.fields{grid-template-columns:1fr}}
+label{display:flex;flex-direction:column;gap:6px;font-size:.9rem;color:var(--mute)}
+label.row{flex-direction:row;align-items:flex-start;gap:8px;color:var(--ink);font-size:.88rem}
+label.row input{margin-top:6px}
+select,input[type=date],input[type=time],textarea{
+  font:inherit;color:var(--ink);background:var(--night);border:1px solid var(--line);
+  border-radius:12px;padding:11px 12px;width:100%;min-height:48px;
+}
+textarea{min-height:64px;resize:vertical}
+.btn{background:var(--gold);color:#fff;border:0;border-radius:999px;padding:14px 16px;font-weight:700;text-align:center;text-decoration:none;display:block;width:100%;font-size:1rem}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:500}
+.back{background:none;border:0;color:var(--mute);padding:8px 0;align-self:flex-start;font-size:.9rem}
+.msg{color:var(--gold);min-height:1.2em;font-size:.9rem}
+.sample{display:inline-block;font-size:.75rem;border:1px solid var(--line);border-radius:999px;padding:1px 10px;color:var(--mute);align-self:flex-start}
+
+/* 命盤 */
+.chart{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:5px;aspect-ratio:1/1.12}
+.cell{border:1px solid var(--line);border-radius:10px;background:var(--panel);display:flex;flex-direction:column;gap:2px;padding:5px 6px;min-width:0;overflow:hidden;text-align:left;transition:background .3s,border-color .3s,box-shadow .3s,transform .15s}
+.cell:active{transform:scale(.97)}
+.cell .stars{font-family:var(--font-display);font-size:.82rem;line-height:1.25;flex:1}
+.cell .stars small{font-family:var(--font-body);font-size:.66rem;color:var(--gold)}
+.cell .minor{font-size:.62rem;color:var(--mute);line-height:1.2}
+.cell .foot{display:flex;justify-content:space-between;font-size:.68rem;color:var(--mute)}
+.cell .foot b{color:var(--ink);font-weight:500}
+.cell .tag{font-size:.62rem;color:var(--gold);min-height:.9em;line-height:1.1}
+.cell.year{background:#f8dfd3;border-color:var(--gold);box-shadow:0 0 16px rgba(122,90,154,.28)}
+.cell.picked{border-color:var(--ink);border-width:2px}
+.center{grid-column:2/4;grid-row:2/4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;padding:6px}
+.center .big{font-family:var(--font-display);font-size:1.25rem;color:var(--gold);line-height:1.25}
+.center .small{font-size:.74rem;color:var(--mute)}
+.detail{border-left:3px solid var(--gold);padding:2px 0 2px 12px;display:flex;flex-direction:column;gap:2px}
+.facts{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.facts b,.hl{color:var(--gold);font-weight:500}
+
+/* 測驗 */
+.qcount{display:flex;justify-content:space-between;font-size:.82rem;color:var(--mute);font-variant-numeric:tabular-nums}
+.qbar{height:5px;border-radius:999px;background:var(--night);overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.qtext{font-family:var(--font-display);font-size:1.25rem;line-height:1.5;min-height:3em;text-wrap:balance}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opts.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:var(--night);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:left;font-size:1rem;min-height:52px;transition:background .15s,transform .1s}
+.opt:active{transform:scale(.98)}
+.opt[aria-pressed=true]{background:var(--gold);color:#fff;border-color:var(--gold);font-weight:700}
+.card{animation:rise .35s ease both}
+@keyframes rise{from{transform:translateY(10px);opacity:.3}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.card{animation:none}.cell,.qbar i,.fill{transition:none}}
+
+/* 結果 */
+.type{font-family:var(--font-display);font-size:1.5rem;color:var(--gold);line-height:1.35;text-wrap:balance}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:3em 1fr 2.6em;gap:8px;align-items:center;font-size:.88rem}
+.bar .track{height:10px;border-radius:999px;background:var(--night);border:1px solid var(--line);overflow:hidden}
+.fill{display:block;height:100%;background:var(--gold);width:0;transition:width .6s}
+.bar .n{font-variant-numeric:tabular-nums;color:var(--mute);text-align:right}
+.read{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.read li{display:flex;flex-direction:column;gap:2px}
+.read .k{font-size:.8rem;color:var(--gold);letter-spacing:.06em}
+.tips{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:8px}
+ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
+#summary{white-space:pre-wrap;font-size:.85rem;background:var(--night);border:1px solid var(--line);border-radius:12px;padding:12px;max-height:240px;overflow:auto;user-select:all}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">療癒不打卡的命理師微辣</p>
+    <h1>2027 命盤自我檢查</h1>
+  </header>
+
+  <nav class="progress" id="progress" aria-label="進度">
+    <span>生日</span><span>命盤</span><span>十題</span><span>結果</span>
+  </nav>
+
+  <!-- 1 生日 -->
+  <section class="step" id="s1">
+    <div class="panel card">
+      <h2>先排出你的命盤</h2>
+      <p class="mute">大約十分鐘。排盤、回答十題，就會看到你今年卡在哪裡，以及三個可以先做的小事。</p>
+      <div class="fields">
+        <label for="bdate">國曆生日<input type="date" id="bdate" min="1930-01-01" max="2026-12-31" value="1990-06-25"></label>
+        <label for="btime">出生時間<input type="time" id="btime" value="12:30"></label>
+        <label for="gender">性別<select id="gender"><option value="女">女</option><option value="男">男</option></select></label>
+        <label for="place">出生地<select id="place"></select></label>
+      </div>
+      <label class="row" for="unsure"><input type="checkbox" id="unsure">我不確定出生時間，先用大概的</label>
+      <label class="row" for="solar"><input type="checkbox" id="solar">依出生地做真太陽時校正（一般不用勾）</label>
+      <button class="btn" id="go" type="button">排盤</button>
+      <p class="msg" id="msg" role="status"></p>
+      <p class="fine">上面先放了一組範例生日，請改成你自己的。資料只在你的手機上計算，不會上傳，也不會儲存。</p>
+    </div>
+  </section>
+
+  <!-- 2 命盤 -->
+  <section class="step" id="s2" hidden>
+    <button class="back" type="button" data-to="1">← 改生日</button>
+    <div class="panel card">
+      <h2>這是你的命盤</h2>
+      <p class="fine" id="meta"></p>
+      <div class="chart" id="chart"></div>
+      <div class="detail" id="detail" aria-live="polite"></div>
+      <p class="fine">點任何一格看說明。金色是 2027 流年命宮；小字「27」是 2027 丁未年的四化，沒標的是你出生年的。</p>
+    </div>
+    <div class="panel card">
+      <h3>2027 年，你的盤上有這幾件事</h3>
+      <ul class="facts" id="facts"></ul>
+      <button class="btn" type="button" data-to="3">下一步：回答十題</button>
+    </div>
+  </section>
+
+  <!-- 3 十題 -->
+  <section class="step" id="s3" hidden>
+    <button class="back" type="button" id="qBack">← 上一題</button>
+    <div class="panel">
+      <div class="qcount"><span id="qNum"></span><span id="qHint"></span></div>
+      <div class="qbar"><i id="qBar"></i></div>
+      <div id="qCard"></div>
+    </div>
+  </section>
+
+  <!-- 4 結果 -->
+  <section class="step" id="s4" hidden aria-live="polite">
+    <button class="back" type="button" data-to="3">← 重新作答</button>
+    <div class="panel card">
+      <p class="eyebrow">你的主要模式</p>
+      <p class="type" id="typeName"></p>
+      <p id="typeText"></p>
+      <div class="bars" id="bars"></div>
+    </div>
+    <div class="panel card">
+      <h3>命盤怎麼說</h3>
+      <ul class="read" id="read"></ul>
+    </div>
+    <div class="panel card">
+      <h3>這七天可以先做的三件小事</h3>
+      <ol class="tips" id="tips"></ol>
+    </div>
+    <div class="panel card">
+      <h3>這一頁做不到的事</h3>
+      <ul class="plain">
+        <li>這些星放在一起，對你這個人代表什麼。</li>
+        <li>時間點：哪幾個月要注意、這個十年的大方向。</li>
+        <li>適合你的做法與先後順序，以及有人陪你做。</li>
+      </ul>
+      <p id="nextStep"></p>
+    </div>
+    <div class="panel card">
+      <h3>想繼續的話，補上四句話</h3>
+      <p class="mute">寫給自己看也很好。寫完會自動加進下面的摘要，貼到 LINE 就不用再填表單。</p>
+      <label for="a1">最想解決的一件事<textarea id="a1" placeholder="例：想換工作想了兩年，一直沒有動"></textarea></label>
+      <label for="a2">多久了？多常發生？<textarea id="a2"></textarea></label>
+      <label for="a3">試過哪些方法？<textarea id="a3"></textarea></label>
+      <label for="a4">三個月後，希望有什麼不一樣？<textarea id="a4"></textarea></label>
+      <label for="live">你現在住在哪一區？<select id="live"><option value="">不想說</option><option>桃園</option><option>台北、新北、基隆</option><option>新竹、苗栗</option><option>台灣其他縣市</option><option>海外</option></select></label>
+      <p class="msg" id="liveMsg"></p>
+      <div id="summary" tabindex="0"></div>
+      <button class="btn" id="copy" type="button">複製我的摘要</button>
+      <p class="msg" id="copyMsg" role="status"></p>
+      <a class="btn ghost" href="https://lin.ee/IuBJs3j" target="_blank" rel="noopener">打開 LINE 貼上（@834lrumm）</a>
+      <p class="fine">貼上摘要後，再回覆「流年」，可以領 2027 流年檢查表。</p>
+    </div>
+  </section>
+
+  <footer class="fine">
+    <p><a href="../" target="_blank" rel="noopener" style="color:var(--gold)">認識微辣，看服務與費用</a></p>
+    <p>排盤使用開源程式庫 iztro，設定為農曆正月初一換年、閏月月中分界、晚子時算次日。各派算法略有不同。星曜關鍵字是通用的簡化說明，不是對你個人的判斷。</p>
+    <p>本頁為命理文化科普與自我整理工具，不能取代醫療、心理、法律或財務專業協助。持續失眠、身體不適或情緒低落已經影響生活時，請先找醫師或心理專業人員。</p>
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/iztro@2.6.3/dist/iztro.min.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var BR = ["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+  var POS = {"子":[4,3],"丑":[4,2],"寅":[4,1],"卯":[3,1],"辰":[2,1],"巳":[1,1],"午":[1,2],"未":[1,3],"申":[1,4],"酉":[2,4],"戌":[3,4],"亥":[4,4]};
+  var YEAR_BRANCH = "未";
+  var Y27 = {"太陰":"祿","天同":"權","天機":"科","巨門":"忌"};
+  var HUA = {"祿":"比較順、資源會往這裡來","權":"會想掌握、要花力氣去推","科":"容易被看見、適合學習與整理","忌":"你會特別在意、需要多花力氣"};
+  var STAR = {"紫微":"想主導，重視被尊重","天機":"想得多，變動快","太陽":"習慣付出，在意被看見","武曲":"務實直接，重結果","天同":"想要舒服，不愛衝突","廉貞":"原則感強，好勝","天府":"求穩，守得住","太陰":"細膩，感受放心裡","貪狼":"想要的多，愛新鮮","巨門":"靠說話處理事情，容易多慮","天相":"顧全大局，在意公平","天梁":"愛照顧人，也愛操心","七殺":"衝得快，不服輸","破軍":"想打掉重來，不安於現狀"};
+  var FOCUS = {"命宮":"你自己想成為什麼樣的人","兄弟":"同輩與夥伴","夫妻":"親密關係","子女":"你照顧的人和你創造的東西","財帛":"錢怎麼賺、怎麼花","疾厄":"身體與作息的節奏","遷移":"走出去、外面的環境","僕役":"人際圈與團隊","官祿":"工作與角色","田宅":"家與安頓感","福德":"內在的餘裕與休息","父母":"長輩、主管與規則"};
+  var PLACES = [["不指定",null],["台北",121.56],["新北",121.46],["基隆",121.74],["桃園",121.30],["新竹",120.97],["苗栗",120.82],["台中",120.68],["彰化",120.54],["南投",120.68],["雲林",120.54],["嘉義",120.45],["台南",120.21],["高雄",120.31],["屏東",120.49],["宜蘭",121.75],["花蓮",121.60],["台東",121.14],["澎湖",119.57],["金門",118.32],["馬祖",119.95],["香港",114.17],["澳門",113.54],["新加坡",103.82],["吉隆坡",101.69],["其他地區",null]];
+  var AREAS = [
+    ["工作與角色","官祿","這週挑一件工作上的事，先問自己：這是我要的，還是別人期待的？"],
+    ["感情與伴侶","夫妻","下次想把話吞下去的時候，先說一句「我需要想一下」。"],
+    ["金錢","財帛","記三天的花費，只看哪一筆花完覺得值得。"],
+    ["家與家人","田宅","在家裡留一個只屬於你的角落，或只屬於你的十分鐘。"],
+    ["孩子與創作","子女","把對孩子或作品的期待寫下來，挑一條可以先放掉的。"],
+    ["身體與作息","疾厄","固定一個上床時間，先守七天。"],
+    ["人際與團隊","僕役","列出最近最耗你力氣的三個人，挑一位少來往一次。"],
+    ["情緒與休息","福德","每天留十分鐘什麼都不做，也不滑手機。"],
+    ["自己與方向","命宮","寫下三件「如果沒有人會評價，我想做的事」。"]
+  ];
+  var QUIZ = [
+    ["rel","我常遇到同一種類型的人，或吵同一種架"],
+    ["dec","想換環境想了很久，一直沒有動"],
+    ["body","明明很累，卻睡不好"],
+    ["rel","我會把話吞下去，事後才生悶氣"],
+    ["dec","做了決定之後，又反覆推翻"],
+    ["body","說不出哪裡不對，就是提不起勁"],
+    ["rel","我很難開口拒絕，或說出自己的需要"],
+    ["dec","換了工作或環境，同樣的問題又出現"],
+    ["body","忙完別人的事，沒有力氣留給自己"]
+  ];
+  var SCALE = ["幾乎沒有","偶爾","經常","幾乎每天"];
+  var TYPES = {
+    rel:{name:"關係型：同一種互動一再重演",text:"你卡住的地方多半出現在和人之間：說不出口的話、重複的爭執、總是由你讓步。",
+      tips:["每天記一次「我想說但沒說的一句話」。只記下來，不用處理。","這週選一件不重要的小事，練習說一次「不」。"],
+      next:"想談下去，適合「個案基本諮詢」或「關係導航」：看你的夫妻宮、福德宮與對宮怎麼互相影響，再談怎麼開口。"},
+    dec:{name:"決策型：想動，但一直停在原地",text:"你卡住的地方多半出現在選擇：想了很久沒有動，或動了之後發現換湯不換藥。",
+      tips:["把卡住的決定寫成兩欄：「我怕失去的」和「我想得到的」，每天各補一行。","替這個決定訂一個「最晚哪一天再看一次」的日期，在那之前不反覆想。"],
+      next:"想談下去，適合「2027 流年詳批」：先看今年適不適合動、要注意哪一格。想談得更深再升級「個案基本諮詢」。"},
+    body:{name:"身體型：身體比腦袋先知道",text:"你卡住的地方多半先出現在身體：睡不好、提不起勁、力氣都給了別人。",
+      tips:["睡前把手放在胸口或腹部三分鐘，只數呼吸。持續不適請先看醫生。","這週拒絕一件不是非你不可的事，把那段時間拿來休息。"],
+      next:"想談下去，適合「紫微×靈氣整合」：先看懂為什麼累，再用靈氣讓身體真的鬆下來。"}
+  };
+  var TYPE_LABEL = {rel:"關係",dec:"決策",body:"身體"};
+  var state = {astro:null, birth:"", area:null, answers:new Array(QUIZ.length).fill(null), q:0, picked:null};
+
+  PLACES.forEach(function(p,i){ var o=document.createElement("option"); o.value=i; o.textContent=p[0]; $("place").appendChild(o); });
+
+  /* ---------- 共用 ---------- */
+  function palName(n){ n = n==="僕役" ? "交友" : n; return /宮$/.test(n) ? n : n+"宮"; }
+  function esc(s){ return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
+  function byName(n){ return state.astro.palaces.filter(function(p){return p.name===n;})[0]; }
+  function byBranch(b){ return state.astro.palaces.filter(function(p){return p.earthlyBranch===b;})[0]; }
+  function opposite(p){ return byBranch(BR[(BR.indexOf(p.earthlyBranch)+6)%12]); }
+  function majors(p){ return p.majorStars.map(function(s){return s.name;}); }
+  function starsText(p){ var m=majors(p); return m.length ? m.join("、") : "空宮，借對面"+palName(opposite(p).name)+"的"+(majors(opposite(p)).join("、")||"星"); }
+  function keywords(p){
+    var src = majors(p).length ? p : opposite(p);
+    return majors(src).filter(function(s){return STAR[s];}).map(function(s){ return s+"："+STAR[s]; });
+  }
+  function show(n){
+    [1,2,3,4].forEach(function(i){ $("s"+i).hidden = i!==n; });
+    Array.prototype.forEach.call($("progress").children,function(el,i){ el.classList.toggle("on", i<n); });
+    window.scrollTo(0,0);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-to]"),function(b){
+    b.addEventListener("click",function(){ var n=parseInt(b.getAttribute("data-to"),10); if(n===3){ state.q=0; renderQ(); } show(n); });
+  });
+
+  /* ---------- 排盤 ---------- */
+  function eot(d){ var s=new Date(d.getFullYear(),0,0); var n=Math.round((d-s)/864e5); var B=2*Math.PI*(n-81)/364; return 9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B); }
+  function timeIndex(h){ return h===23 ? 12 : Math.floor((h+1)/2); }
+  function build(){
+    var dv=$("bdate").value, tv=$("btime").value;
+    if(!dv || !tv){ $("msg").textContent="請先填生日和出生時間。"; return false; }
+    if(!window.iztro){ $("msg").textContent="排盤程式沒有載入，請確認網路後重新整理。"; return false; }
+    var dp=dv.split("-").map(Number), tp=tv.split(":").map(Number);
+    var d=new Date(dp[0],dp[1]-1,dp[2],tp[0],tp[1]);
+    var place=PLACES[parseInt($("place").value,10)], note="";
+    if($("solar").checked && place[1]!=null){
+      var adj=Math.round((place[1]-120)*4 + eot(d));
+      d=new Date(d.getTime()+adj*60000);
+      note="（真太陽時 "+(adj>=0?"+":"")+adj+" 分）";
+    }
+    try{
+      iztro.astro.config({yearDivide:"normal",horoscopeDivide:"normal"});
+      state.astro=iztro.astro.bySolar(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(), timeIndex(d.getHours()), $("gender").value, true, "zh-TW");
+    }catch(e){ $("msg").textContent="這個日期排不出來，請檢查生日是否正確。"; return false; }
+    state.birth=dv.replace(/-/g,"/")+" "+tv+" "+$("gender").value+"，出生地："+place[0]+note+($("unsure").checked?"（時間不確定）":"");
+    $("msg").textContent="";
+    return true;
+  }
+
+  var cells = {};
+  BR.forEach(function(b){
+    var d=document.createElement("button"); d.type="button"; d.className="cell";
+    d.style.gridRow=POS[b][0]; d.style.gridColumn=POS[b][1];
+    d.innerHTML='<span class="tag"></span><span class="stars"></span><span class="minor"></span><span class="foot"><b></b><span></span></span>';
+    d.addEventListener("click",function(){ state.picked=b; renderChart(); });
+    $("chart").appendChild(d); cells[b]=d;
+  });
+  var center=document.createElement("div"); center.className="center";
+  center.innerHTML='<span class="small">2027 流年命宮</span><span class="big" id="cBig"></span><span class="small" id="cSmall"></span>';
+  $("chart").appendChild(center);
+
+  function renderChart(){
+    var a=state.astro;
+    if(!state.picked) state.picked=YEAR_BRANCH;
+    a.palaces.forEach(function(p){
+      var c=cells[p.earthlyBranch];
+      var html=p.majorStars.map(function(s){
+        var t=esc(s.name);
+        if(s.mutagen) t+='<small>'+esc(s.mutagen)+'</small>';
+        if(Y27[s.name]) t+='<small> 27'+Y27[s.name]+'</small>';
+        return t;
+      }).join("<br>");
+      c.querySelector(".stars").innerHTML = html || '<span style="color:var(--mute);font-size:.72rem">空宮</span>';
+      c.querySelector(".minor").textContent = p.minorStars.slice(0,4).map(function(s){return s.name+(s.mutagen||"");}).join(" ");
+      c.querySelector(".foot b").textContent = palName(p.name).replace("宮","") + (p.isBodyPalace?"・身":"");
+      c.querySelector(".foot span").textContent = p.heavenlyStem+p.earthlyBranch;
+      var isYear=p.earthlyBranch===YEAR_BRANCH;
+      c.classList.toggle("year",isYear);
+      c.classList.toggle("picked",p.earthlyBranch===state.picked);
+      c.querySelector(".tag").textContent = isYear ? "2027 流年命宮" : "";
+      c.setAttribute("aria-label",palName(p.name)+"："+starsText(p));
+    });
+    var yp=byBranch(YEAR_BRANCH), ming=byName("命宮");
+    $("cBig").textContent=palName(yp.name);
+    $("cSmall").textContent=majors(yp).join("、") || "空宮";
+    $("meta").textContent="農曆 "+a.lunarDate+" "+a.time+"｜"+a.fiveElementsClass+"｜命宮在"+ming.earthlyBranch;
+    var pp=byBranch(state.picked), kw=keywords(pp);
+    $("detail").innerHTML='<b>'+palName(pp.name)+'</b><span class="mute">管的是：'+esc(FOCUS[pp.name]||"")+'</span><span>'+esc(starsText(pp))+'</span>'
+      +(kw.length?'<span class="fine">'+esc(kw.join("；"))+'</span>':'');
+    var facts=['今年的重心會落在本命<b>'+palName(yp.name)+'</b>，也就是'+esc(FOCUS[yp.name])+'。'];
+    Object.keys(Y27).forEach(function(star){
+      var hit=a.palaces.filter(function(p){return majors(p).indexOf(star)>=0;})[0];
+      if(hit) facts.push('化'+Y27[star]+'（'+star+'）在<b>'+palName(hit.name)+'</b>：'+HUA[Y27[star]]+'。');
+    });
+    $("facts").innerHTML=facts.map(function(f){return "<li>"+f+"</li>";}).join("");
+  }
+
+  $("go").addEventListener("click",function(){ if(build()){ state.picked=null; renderChart(); show(2); } });
+
+  /* ---------- 十題 ---------- */
+  function renderQ(){
+    var total=QUIZ.length+1, i=state.q, card=$("qCard");
+    $("qNum").textContent="第 "+(i+1)+" 題，共 "+total+" 題";
+    $("qBar").style.width=Math.round(i/total*100)+"%";
+    $("qBack").textContent = i===0 ? "← 回命盤" : "← 上一題";
+    var html='<div class="card" style="display:flex;flex-direction:column;gap:14px">';
+    if(i===0){
+      $("qHint").textContent="選一個";
+      html+='<p class="qtext">最近最困擾你的，是哪一塊？</p><div class="opts grid">';
+      AREAS.forEach(function(a,k){ html+='<button type="button" class="opt" data-v="'+k+'" aria-pressed="'+(state.area===k)+'">'+a[0]+'</button>'; });
+    }else{
+      $("qHint").textContent="最近三個月";
+      html+='<p class="qtext">'+esc(QUIZ[i-1][1])+'</p><div class="opts">';
+      SCALE.forEach(function(s,k){ html+='<button type="button" class="opt" data-v="'+k+'" aria-pressed="'+(state.answers[i-1]===k)+'">'+s+'</button>'; });
+    }
+    html+='</div></div>';
+    card.innerHTML=html;
+    Array.prototype.forEach.call(card.querySelectorAll(".opt"),function(b){
+      b.addEventListener("click",function(){
+        var v=parseInt(b.getAttribute("data-v"),10);
+        if(i===0) state.area=v; else state.answers[i-1]=v;
+        Array.prototype.forEach.call(card.querySelectorAll(".opt"),function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+        setTimeout(function(){
+          if(state.q<QUIZ.length){ state.q++; renderQ(); }
+          else{ $("qBar").style.width="100%"; renderResult(); show(4); }
+        },220);
+      });
+    });
+  }
+  $("qBack").addEventListener("click",function(){ if(state.q===0) show(2); else{ state.q--; renderQ(); } });
+
+  /* ---------- 結果 ---------- */
+  function renderResult(){
+    var s={rel:0,dec:0,body:0};
+    QUIZ.forEach(function(q,i){ s[q[0]]+=state.answers[i]||0; });
+    var keys=["rel","dec","body"], top=keys.slice().sort(function(x,y){return s[y]-s[x];})[0], t=TYPES[top];
+    var a=state.astro, area=AREAS[state.area==null?0:state.area], ap=byName(area[1]), yp=byBranch(YEAR_BRANCH);
+    $("typeName").textContent=t.name; $("typeText").textContent=t.text;
+    $("bars").innerHTML=keys.map(function(k){
+      return '<div class="bar"><span>'+TYPE_LABEL[k]+'</span><span class="track"><i class="fill" data-w="'+Math.round(s[k]/9*100)+'"></i></span><span class="n">'+s[k]+'/9</span></div>';
+    }).join("");
+    setTimeout(function(){ Array.prototype.forEach.call(document.querySelectorAll(".fill"),function(f){ f.style.width=f.getAttribute("data-w")+"%"; }); },60);
+
+    var kw=keywords(ap), touch=majors(ap).filter(function(x){return Y27[x];});
+    var read=[
+      ["你選的「"+area[0]+"」", "對應你的"+palName(area[1])+"："+starsText(ap)+"。"+(kw.length?" "+kw.join("；")+"。":"")],
+      ["2027 年這一格", touch.length ? touch.map(function(x){return x+"化"+Y27[x]+"，"+HUA[Y27[x]];}).join("；")+"。" : "今年的四化沒有直接落在這一格，壓力比較可能來自別處。"],
+      ["今年的重心", "流年命宮在本命"+palName(yp.name)+"，主題是"+FOCUS[yp.name]+"。"+(yp.name===area[1]?"剛好就是你最困擾的這一塊，所以今年特別有感。":"")]
+    ];
+    $("read").innerHTML=read.map(function(r){ return '<li><span class="k">'+esc(r[0])+'</span><span>'+esc(r[1])+'</span></li>'; }).join("");
+    $("tips").innerHTML=t.tips.concat([area[2]]).map(function(x){ return "<li>"+esc(x)+"</li>"; }).join("");
+    $("nextStep").textContent=t.next;
+    $("liveMsg").textContent = /桃園|台北|新竹/.test($("live").value) ? "你住得不遠。實體靈氣工作坊開課時，可以在 LINE 跟我說「工作坊」。" : "";
+
+    var ji=a.palaces.filter(function(p){return majors(p).indexOf("巨門")>=0;})[0];
+    var v=function(id){ return $(id).value.trim() || "（未填）"; };
+    $("summary").textContent=[
+      "【諮詢前摘要｜來自 2027 命盤自我檢查】",
+      "生日（國曆）："+state.birth,
+      "命盤："+a.fiveElementsClass+"，命宮 "+starsText(byName("命宮")),
+      "2027 流年命宮：本命"+palName(yp.name)+"（"+starsText(yp)+"）",
+      "2027 化忌："+(ji?palName(ji.name):"—"),
+      "最困擾的領域："+area[0]+"（"+palName(area[1])+"："+starsText(ap)+"）",
+      "測驗：關係 "+s.rel+"/9、決策 "+s.dec+"/9、身體 "+s.body+"/9，主要是"+TYPE_LABEL[top]+"型",
+      "最想解決的一件事："+v("a1"),
+      "多久了、多常發生："+v("a2"),
+      "試過的方法："+v("a3"),
+      "三個月後希望："+v("a4"),
+      "目前居住："+($("live").value||"（未填）"),
+      "想了解："+({rel:"基本諮詢或關係導航",dec:"2027 流年詳批",body:"紫微×靈氣整合"})[top]
+    ].join("\n");
+  }
+  ["a1","a2","a3","a4"].forEach(function(id){ $(id).addEventListener("input",renderResult); });
+  $("live").addEventListener("change",renderResult);
+  $("copy").addEventListener("click",function(){
+    var text=$("summary").textContent, m=$("copyMsg");
+    var fallback=function(){ m.textContent="這支手機不能自動複製。請長按上面的摘要，全選後複製。"; };
+    try{ navigator.clipboard.writeText(text).then(function(){ m.textContent="已複製。打開 LINE 貼上就可以了。"; },fallback); }catch(e){ fallback(); }
+  });
+
+  show(1);
+})();
+</script>
+</body>
+</html>
