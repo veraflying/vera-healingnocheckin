@@ -139,7 +139,7 @@ footer .wrap{display:flex;flex-direction:column;gap:12px}
   .voices{grid-template-columns:repeat(2,1fr)}
   .doors{grid-template-columns:repeat(2,1fr)}
   .creds{flex-direction:row;flex-wrap:wrap;gap:20px 28px;border-top:0}
-  .creds div{grid-template-columns:1fr;gap:2px;flex:1 1 40%;border-bottom:0;border-top:1.5px solid var(--gold);padding-top:12px}
+  .creds div{grid-template-columns:1fr;gap:2px;flex:1 1 40%;border-bottom:0;border-top:1.5px solid var(--gold);padding-top:12px;align-content:start}
   .band.sprig-r::before{width:170px;height:226px;right:3%;top:18px;opacity:.8}
   .band.sprig-l::before{width:150px;height:200px;left:2%}
 }
