@@ -50,7 +50,8 @@ button{font:inherit;cursor:pointer;color:inherit}
 label{display:flex;flex-direction:column;gap:6px;font-size:.9rem;color:var(--mute)}
 label.row{flex-direction:row;align-items:flex-start;gap:8px;color:var(--ink);font-size:.88rem}
 label.row input{margin-top:6px}
-select,input[type=date],input[type=time],textarea{
+.fields .wide{grid-column:1/-1}
+select,input[type=date],input[type=time],input[type=text],input[type=number],textarea{
   font:inherit;color:var(--ink);background:var(--night);border:1px solid var(--line);
   border-radius:12px;padding:11px 12px;width:100%;min-height:48px;
 }
@@ -130,9 +131,16 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
         <label for="btime">出生時間<input type="time" id="btime" value="12:30"></label>
         <label for="gender">性別<select id="gender"><option value="女">女</option><option value="男">男</option></select></label>
         <label for="place">出生地<select id="place"></select></label>
+        <label for="city" id="cityBox" hidden>城市<select id="city"></select></label>
+        <div class="wide fields" id="manualBox" hidden>
+          <label for="mPlace" class="wide">出生地名稱<input type="text" id="mPlace" placeholder="例如：溫州、洛杉磯"></label>
+          <label for="mLon">東經（度）<input type="number" id="mLon" step="0.01" min="-180" max="180" placeholder="例如 120.70"></label>
+          <label for="mTz">當地時區（UTC+）<input type="number" id="mTz" step="0.5" min="-12" max="14" value="8"></label>
+          <p class="fine wide">經度可以用 Google 地圖查：在地圖上按住出生地，會出現兩個數字，第二個就是經度。西經請填負數。時區填出生當時的時區，如果當地那時是夏令時間，要加 1（例如洛杉磯夏天填 -7）。不知道經度也沒關係，留空就不做校正。</p>
+        </div>
       </div>
       <label class="row" for="unsure"><input type="checkbox" id="unsure">我不確定出生時間，先用大概的</label>
-      <label class="row" for="solar"><input type="checkbox" id="solar">依出生地做真太陽時校正（一般不用勾）</label>
+      <label class="row" for="solar"><input type="checkbox" id="solar" checked>依出生地做真太陽時校正（建議保留勾選）</label>
       <button class="btn" id="go" type="button">排盤</button>
       <p class="msg" id="msg" role="status"></p>
       <p class="fine">上面先放了一組範例生日，請改成你自己的。資料只在你的手機上計算，不會上傳，也不會儲存。</p>
@@ -227,7 +235,8 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   var HUA = {"祿":"比較順、資源會往這裡來","權":"會想掌握、要花力氣去推","科":"容易被看見、適合學習與整理","忌":"你會特別在意、需要多花力氣"};
   var STAR = {"紫微":"想主導，重視被尊重","天機":"想得多，變動快","太陽":"習慣付出，在意被看見","武曲":"務實直接，重結果","天同":"想要舒服，不愛衝突","廉貞":"原則感強，好勝","天府":"求穩，守得住","太陰":"細膩，感受放心裡","貪狼":"想要的多，愛新鮮","巨門":"靠說話處理事情，容易多慮","天相":"顧全大局，在意公平","天梁":"愛照顧人，也愛操心","七殺":"衝得快，不服輸","破軍":"想打掉重來，不安於現狀"};
   var FOCUS = {"命宮":"你自己想成為什麼樣的人","兄弟":"同輩與夥伴","夫妻":"親密關係","子女":"你照顧的人和你創造的東西","財帛":"錢怎麼賺、怎麼花","疾厄":"身體與作息的節奏","遷移":"走出去、外面的環境","僕役":"人際圈與團隊","官祿":"工作與角色","田宅":"家與安頓感","福德":"內在的餘裕與休息","父母":"長輩、主管與規則"};
-  var PLACES = [["不指定",null],["台北",121.56],["新北",121.46],["基隆",121.74],["桃園",121.30],["新竹",120.97],["苗栗",120.82],["台中",120.68],["彰化",120.54],["南投",120.68],["雲林",120.54],["嘉義",120.45],["台南",120.21],["高雄",120.31],["屏東",120.49],["宜蘭",121.75],["花蓮",121.60],["台東",121.14],["澎湖",119.57],["金門",118.32],["馬祖",119.95],["香港",114.17],["澳門",113.54],["新加坡",103.82],["吉隆坡",101.69],["其他地區",null]];
+  var PLACES = [["不指定",null],["台北",121.56],["新北",121.46],["基隆",121.74],["桃園",121.30],["新竹",120.97],["苗栗",120.82],["台中",120.68],["彰化",120.54],["南投",120.68],["雲林",120.54],["嘉義",120.45],["台南",120.21],["高雄",120.31],["屏東",120.49],["宜蘭",121.75],["花蓮",121.60],["台東",121.14],["澎湖",119.57],["金門",118.32],["馬祖",119.95],["香港",114.17],["澳門",113.54],["新加坡",103.82],["吉隆坡",101.69],["中國","CN"],["其他地區","OTHER"]];
+  var CN_CITIES = [["北京",116.40],["上海",121.47],["天津",117.20],["重慶",106.55],["廣州",113.26],["深圳",114.06],["杭州",120.16],["南京",118.80],["蘇州",120.62],["廈門",118.09],["福州",119.30],["泉州",118.68],["武漢",114.31],["成都",104.07],["西安",108.94],["長沙",112.94],["鄭州",113.63],["濟南",117.00],["青島",120.38],["合肥",117.23],["南昌",115.86],["瀋陽",123.43],["大連",121.61],["哈爾濱",126.53],["長春",125.32],["石家莊",114.51],["太原",112.55],["呼和浩特",111.75],["昆明",102.83],["貴陽",106.63],["南寧",108.37],["海口",110.20],["蘭州",103.83],["西寧",101.78],["銀川",106.23],["烏魯木齊",87.62],["拉薩",91.13]];
   var AREAS = [
     ["工作與角色","官祿","這週挑一件工作上的事，先問自己：這是我要的，還是別人期待的？"],
     ["感情與伴侶","夫妻","下次想把話吞下去的時候，先說一句「我需要想一下」。"],
@@ -250,7 +259,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     ["dec","換了工作或環境，同樣的問題又出現"],
     ["body","忙完別人的事，沒有力氣留給自己"]
   ];
-  var SCALE = ["幾乎沒有","偶爾","經常","幾乎每天"];
+  var SCALE = ["完全沒有：最近三個月想不起來有過","很少：三個月內一兩次","有時：大約每個月幾次","常常：幾乎每週都有","總是：幾乎每天，已經影響生活"];
   var TYPES = {
     rel:{name:"關係型：同一種互動一再重演",text:"你卡住的地方多半出現在和人之間：說不出口的話、重複的爭執、總是由你讓步。",
       tips:["每天記一次「我想說但沒說的一句話」。只記下來，不用處理。","這週選一件不重要的小事，練習說一次「不」。"],
@@ -266,6 +275,30 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   var state = {astro:null, birth:"", area:null, answers:new Array(QUIZ.length).fill(null), q:0, picked:null};
 
   PLACES.forEach(function(p,i){ var o=document.createElement("option"); o.value=i; o.textContent=p[0]; $("place").appendChild(o); });
+  CN_CITIES.forEach(function(c,i){ var o=document.createElement("option"); o.value=i; o.textContent=c[0]; $("city").appendChild(o); });
+  (function(){ var o=document.createElement("option"); o.value="manual"; o.textContent="其他（手動填寫）"; $("city").appendChild(o); })();
+  function syncPlace(){
+    var kind=PLACES[parseInt($("place").value,10)][1];
+    var showCity = kind==="CN" || kind==="OTHER";
+    $("cityBox").hidden=!showCity;
+    $("manualBox").hidden=!(showCity && $("city").value==="manual");
+  }
+  $("place").addEventListener("change",function(){
+    var kind=PLACES[parseInt($("place").value,10)][1];
+    if(kind==="OTHER") $("city").value="manual"; else if(kind==="CN" && $("city").value==="manual") $("city").value="0";
+    syncPlace();
+  });
+  $("city").addEventListener("change",syncPlace);
+  syncPlace();
+  /* 回傳 [顯示名稱, 經度或 null, 時區] */
+  function resolvePlace(){
+    var p=PLACES[parseInt($("place").value,10)];
+    if(p[1]!=="CN" && p[1]!=="OTHER") return [p[0], p[1], 8];
+    if($("city").value!=="manual"){ var c=CN_CITIES[parseInt($("city").value,10)]; return ["中國"+c[0], c[1], 8]; }
+    var name=$("mPlace").value.trim() || (p[1]==="CN"?"中國":"其他地區");
+    var lon=parseFloat($("mLon").value), tz=parseFloat($("mTz").value);
+    return [name, isNaN(lon)?null:lon, isNaN(tz)?8:tz];
+  }
 
   /* ---------- 共用 ---------- */
   function palName(n){ n = n==="僕役" ? "交友" : n; return /宮$/.test(n) ? n : n+"宮"; }
@@ -297,9 +330,9 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     if(!window.iztro){ $("msg").textContent="排盤程式沒有載入，請確認網路後重新整理。"; return false; }
     var dp=dv.split("-").map(Number), tp=tv.split(":").map(Number);
     var d=new Date(dp[0],dp[1]-1,dp[2],tp[0],tp[1]);
-    var place=PLACES[parseInt($("place").value,10)], note="";
+    var place=resolvePlace(), note="";
     if($("solar").checked && place[1]!=null){
-      var adj=Math.round((place[1]-120)*4 + eot(d));
+      var adj=Math.round((place[1]-place[2]*15)*4 + eot(d));
       d=new Date(d.getTime()+adj*60000);
       note="（真太陽時 "+(adj>=0?"+":"")+adj+" 分）";
     }
@@ -374,9 +407,9 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       html+='<p class="qtext">最近最困擾你的，是哪一塊？</p><div class="opts grid">';
       AREAS.forEach(function(a,k){ html+='<button type="button" class="opt" data-v="'+k+'" aria-pressed="'+(state.area===k)+'">'+a[0]+'</button>'; });
     }else{
-      $("qHint").textContent="最近三個月";
+      $("qHint").textContent="最近三個月，選最接近的";
       html+='<p class="qtext">'+esc(QUIZ[i-1][1])+'</p><div class="opts">';
-      SCALE.forEach(function(s,k){ html+='<button type="button" class="opt" data-v="'+k+'" aria-pressed="'+(state.answers[i-1]===k)+'">'+s+'</button>'; });
+      SCALE.forEach(function(s,k){ var sp=s.split("："); html+='<button type="button" class="opt" data-v="'+k+'" aria-pressed="'+(state.answers[i-1]===k)+'"><b>'+sp[0]+'</b><span class="fine" style="display:block;color:inherit;opacity:.8">'+sp[1]+'</span></button>'; });
     }
     html+='</div></div>';
     card.innerHTML=html;
@@ -402,7 +435,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     var a=state.astro, area=AREAS[state.area==null?0:state.area], ap=byName(area[1]), yp=byBranch(YEAR_BRANCH);
     $("typeName").textContent=t.name; $("typeText").textContent=t.text;
     $("bars").innerHTML=keys.map(function(k){
-      return '<div class="bar"><span>'+TYPE_LABEL[k]+'</span><span class="track"><i class="fill" data-w="'+Math.round(s[k]/9*100)+'"></i></span><span class="n">'+s[k]+'/9</span></div>';
+      return '<div class="bar"><span>'+TYPE_LABEL[k]+'</span><span class="track"><i class="fill" data-w="'+Math.round(s[k]/12*100)+'"></i></span><span class="n">'+s[k]+'/12</span></div>';
     }).join("");
     setTimeout(function(){ Array.prototype.forEach.call(document.querySelectorAll(".fill"),function(f){ f.style.width=f.getAttribute("data-w")+"%"; }); },60);
 
@@ -426,7 +459,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       "2027 流年命宮：本命"+palName(yp.name)+"（"+starsText(yp)+"）",
       "2027 化忌："+(ji?palName(ji.name):"—"),
       "最困擾的領域："+area[0]+"（"+palName(area[1])+"："+starsText(ap)+"）",
-      "測驗：關係 "+s.rel+"/9、決策 "+s.dec+"/9、身體 "+s.body+"/9，主要是"+TYPE_LABEL[top]+"型",
+      "測驗：關係 "+s.rel+"/12、決策 "+s.dec+"/12、身體 "+s.body+"/12，主要是"+TYPE_LABEL[top]+"型",
       "最想解決的一件事："+v("a1"),
       "多久了、多常發生："+v("a2"),
       "試過的方法："+v("a3"),
