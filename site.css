@@ -72,6 +72,7 @@ h3{margin:0;font-size:1.05rem}
 .course b{font-family:var(--font-display);font-size:1.2rem}
 .course .price{margin:0;font-family:var(--font-display);font-size:1.35rem;color:var(--plum)}
 .course .price span{font-family:var(--font-body,inherit);font-size:.9rem;color:var(--mute)}
+.course .next{margin:0;font-size:.95rem;line-height:1.7;background:var(--pink);border-left:3px solid var(--gold);border-radius:8px;padding:8px 12px}
 .course .d{margin:0;font-size:.95rem;color:var(--mute);line-height:1.7;flex:1}
 @media (min-width:720px){.courses{grid-template-columns:1fr 1fr}}
 .door{display:grid;grid-template-columns:auto 1fr auto;gap:4px 16px;align-items:center;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 20px;box-shadow:0 6px 20px rgba(122,90,154,.07);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
