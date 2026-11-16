@@ -309,13 +309,16 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   $("city").addEventListener("change",syncPlace);
   syncPlace();
   /* 回傳 [顯示名稱, 經度或 null, 時區] */
+  /* 預設地點對應的時區資料庫名稱：用來查出生當時當地實際用的時間（夏令時間、舊時區），不能一律當成 UTC+8 */
+  var ZONES = {"香港":"Asia/Hong_Kong","澳門":"Asia/Macau","新加坡":"Asia/Singapore","吉隆坡":"Asia/Kuala_Lumpur"};
+  /* 回傳 [顯示名稱, 經度或 null, 手動時區或 null, 時區資料庫名稱或 null] */
   function resolvePlace(){
     var p=PLACES[parseInt($("place").value,10)];
-    if(p[1]!=="CN" && p[1]!=="OTHER") return [p[0], p[1], 8];
-    if($("city").value!=="manual"){ var c=CN_CITIES[parseInt($("city").value,10)]; return ["中國"+c[0], c[1], 8]; }
+    if(p[1]!=="CN" && p[1]!=="OTHER") return [p[0], p[1], null, p[1]==null ? null : (ZONES[p[0]] || "Asia/Taipei")];
+    if($("city").value!=="manual"){ var c=CN_CITIES[parseInt($("city").value,10)]; return ["中國"+c[0], c[1], null, "Asia/Shanghai"]; }
     var name=$("mPlace").value.trim() || (p[1]==="CN"?"中國":"其他地區");
     var lon=parseFloat($("mLon").value), tz=parseFloat($("mTz").value);
-    return [name, isNaN(lon)?null:lon, isNaN(tz)?8:tz];
+    return [name, isNaN(lon)?null:lon, isNaN(tz)?8:tz, null];
   }
 
   /* ---------- 共用 ---------- */
@@ -340,23 +343,37 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   });
 
   /* ---------- 排盤 ---------- */
-  function eot(d){ var s=new Date(d.getFullYear(),0,0); var n=Math.round((d-s)/864e5); var B=2*Math.PI*(n-81)/364; return 9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B); }
+  /* 以下時間一律用「把牆上時間當成 UTC」的毫秒數計算，結果不受訪客手機所在時區影響 */
+  function eot(w){ var d=new Date(w); var n=Math.round((w-Date.UTC(d.getUTCFullYear(),0,0))/864e5); var B=2*Math.PI*(n-81)/364; return 9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B); }
+  /* 某時區在某個牆上時間實際的 UTC 偏移（分鐘）；瀏覽器查不到時回傳 480（UTC+8） */
+  function zoneOffset(zone, w){
+    try{
+      var f=new Intl.DateTimeFormat("en-US",{timeZone:zone,hourCycle:"h23",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"});
+      var at=function(utc){ var o={}; f.formatToParts(new Date(utc)).forEach(function(x){o[x.type]=+x.value;}); return Math.round((Date.UTC(o.year,o.month-1,o.day,o.hour,o.minute,o.second)-utc)/60000); };
+      var off=at(w-480*60000); return at(w-off*60000);
+    }catch(e){ return 480; }
+  }
   function timeIndex(h){ return h===23 ? 12 : Math.floor((h+1)/2); }
   function build(){
     var dv=$("bdate").value, tv=$("btime").value;
     if(!dv || !tv){ $("msg").textContent="請先填生日和出生時間。"; return false; }
     if(!window.iztro){ $("msg").textContent="排盤程式沒有載入，請確認網路後重新整理。"; return false; }
     var dp=dv.split("-").map(Number), tp=tv.split(":").map(Number);
-    var d=new Date(dp[0],dp[1]-1,dp[2],tp[0],tp[1]);
+    var w=Date.UTC(dp[0],dp[1]-1,dp[2],tp[0],tp[1]);
     var place=resolvePlace(), note="";
+    if(place[3]===null && place[1]!=null && (Math.abs(place[1])>180 || place[2]<-12 || place[2]>14)){ $("msg").textContent="經度請填 -180 到 180，時區請填 -12 到 14。"; return false; }
+    var off = place[3] ? zoneOffset(place[3], w) : (place[2]==null ? 480 : place[2]*60);
     if($("solar").checked && place[1]!=null){
-      var adj=Math.round((place[1]-place[2]*15)*4 + eot(d));
-      d=new Date(d.getTime()+adj*60000);
-      note="（真太陽時 "+(adj>=0?"+":"")+adj+" 分）";
+      var adj=Math.round(place[1]*4 - off + eot(w));
+      w+=adj*60000;
+      note="（真太陽時 "+(adj>=0?"+":"")+adj+" 分"+(place[3] && off!==480 ? "，已換算當時當地的"+(off===540?"夏令時間":"時區") : "")+"）";
+    }else if(place[3] && off!==480){
+      note="（注意：當時當地"+(off===540?"實施夏令時間，時鐘比標準時間快 1 小時":"的時區不是 UTC+8")+"，建議勾選真太陽時校正）";
     }
+    var d=new Date(w);
     try{
       iztro.astro.config({yearDivide:"normal",horoscopeDivide:"normal"});
-      state.astro=iztro.astro.bySolar(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(), timeIndex(d.getHours()), $("gender").value, true, "zh-TW");
+      state.astro=iztro.astro.bySolar(d.getUTCFullYear()+"-"+(d.getUTCMonth()+1)+"-"+d.getUTCDate(), timeIndex(d.getUTCHours()), $("gender").value, true, "zh-TW");
     }catch(e){ $("msg").textContent="這個日期排不出來，請檢查生日是否正確。"; return false; }
     state.birth=dv.replace(/-/g,"/")+" "+tv+" "+$("gender").value+"，出生地："+place[0]+note+($("unsure").checked?"（時間不確定）":"");
     $("msg").textContent="";
@@ -399,7 +416,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     var yp=byBranch(YEAR_BRANCH), ming=byName("命宮");
     $("cBig").textContent=palName(yp.name);
     $("cSmall").textContent=majors(yp).join("、") || "空宮";
-    $("meta").textContent="農曆 "+a.lunarDate+" "+a.time+"｜"+a.fiveElementsClass+"｜命宮在"+ming.earthlyBranch;
+    $("meta").textContent="農曆 "+String(a.lunarDate).replace(/闰/g,"閏").replace(/腊/g,"臘")+" "+a.time+"｜"+a.fiveElementsClass+"｜命宮在"+ming.earthlyBranch;
     var pp=byBranch(state.picked), kw=keywords(pp);
     $("detail").innerHTML='<b>'+palName(pp.name)+'</b><span class="mute">管的是：'+esc(FOCUS[pp.name]||"")+'</span><span>'+esc(starsText(pp))+'</span>'
       +(kw.length?'<span class="fine">'+esc(kw.join("；"))+'</span>':'');
