@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* 版面：手機優先的四步精靈，一次只看一個畫面：生日、命盤、十題、結果。上方進度條，淺色單一主題，與個人網站同一套淡紫與蜜桃色。 */
+  /* 版面：手機優先的四步精靈，一次只看一個畫面：生日、命盤、測驗、結果。上方進度條，淺色單一主題，與個人網站同一套淡紫與蜜桃色。 */
   color-scheme: light;
   --night:#faf6fb;   /* 頁面底色 */
   --panel:#ffffff;
@@ -118,14 +118,14 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   </header>
 
   <nav class="progress" id="progress" aria-label="進度">
-    <span>生日</span><span>命盤</span><span>十題</span><span>結果</span>
+    <span>生日</span><span>命盤</span><span>測驗</span><span>結果</span>
   </nav>
 
   <!-- 1 生日 -->
   <section class="step" id="s1">
     <div class="panel card">
       <h2>先排出你的命盤</h2>
-      <p class="mute">大約十分鐘。排盤、回答十題，就會看到你今年卡在哪裡，以及三個可以先做的小事。</p>
+      <p class="mute">大約十分鐘。排盤、回答十幾個小問題，就會看到你今年卡在哪裡，以及三個可以先做的小事。</p>
       <div class="fields">
         <label for="bdate">國曆生日<input type="date" id="bdate" min="1930-01-01" max="2026-12-31" value="1990-06-25"></label>
         <label for="btime">出生時間<input type="time" id="btime" value="12:30"></label>
@@ -160,11 +160,11 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     <div class="panel card">
       <h3>2027 年，你的盤上有這幾件事</h3>
       <ul class="facts" id="facts"></ul>
-      <button class="btn" type="button" data-to="3">下一步：回答十題</button>
+      <button class="btn" type="button" data-to="3">下一步：開始測驗</button>
     </div>
   </section>
 
-  <!-- 3 十題 -->
+  <!-- 3 測驗 -->
   <section class="step" id="s3" hidden>
     <button class="back" type="button" id="qBack">← 上一題</button>
     <div class="panel">
@@ -249,16 +249,21 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     ["自己與方向","命宮","寫下三件「如果沒有人會評價，我想做的事」。"]
   ];
   var QUIZ = [
-    ["rel","我常遇到同一種類型的人，或吵同一種架"],
-    ["dec","想換環境想了很久，一直沒有動"],
-    ["body","明明很累，卻睡不好"],
-    ["rel","我會把話吞下去，事後才生悶氣"],
-    ["dec","做了決定之後，又反覆推翻"],
-    ["body","說不出哪裡不對，就是提不起勁"],
-    ["rel","我很難開口拒絕，或說出自己的需要"],
-    ["dec","換了工作或環境，同樣的問題又出現"],
-    ["body","忙完別人的事，沒有力氣留給自己"]
+    ["rel","跟某些人相處完，我需要一段時間才能恢復"],
+    ["dec","有一件事我想改變很久了，到現在還沒開始"],
+    ["body","睡了一整晚，醒來還是累"],
+    ["dec","做了決定之後，一直想「如果選另一個會不會比較好」"],
+    ["body","壓力一大，身體就先出狀況（頭痛、胃不舒服、肩頸很緊）"],
+    ["rel","心裡不同意，嘴上還是說「好」"],
+    ["body","一有空檔，我只想躺著，什麼都不想做"],
+    ["rel","同一種爭執或不愉快，會跟同一個人（或同一類人）重複發生"],
+    ["dec","遇到選擇時，我問了很多人的意見，還是決定不了"],
+    ["rel","我會看別人的臉色，調整自己要說的話"],
+    ["body","忙起來會忘記吃飯、喝水，或一直憋尿"],
+    ["dec","我會用「等時機對了再說」把事情往後延"]
   ];
+  var FINAL = {q:"如果明天醒來，有一件事突然變好了，你最希望是哪一件？", opts:[["rel","跟某個人的相處變輕鬆了"],["dec","卡住的那個決定終於有答案了"],["body","身體和精神都恢復了元氣"]]};
+  var MAX = 4*4+2;
   var SCALE = ["完全沒有：最近三個月想不起來有過","很少：三個月內一兩次","有時：大約每個月幾次","常常：幾乎每週都有","總是：幾乎每天，已經影響生活"];
   var TYPES = {
     rel:{name:"關係型：同一種互動一再重演",text:"你卡住的地方多半出現在和人之間：說不出口的話、重複的爭執、總是由你讓步。",
@@ -272,7 +277,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       next:"想談下去，適合「紫微×靈氣整合」：先看懂為什麼累，再用靈氣讓身體真的鬆下來。"}
   };
   var TYPE_LABEL = {rel:"關係",dec:"決策",body:"身體"};
-  var state = {astro:null, birth:"", area:null, answers:new Array(QUIZ.length).fill(null), q:0, picked:null};
+  var state = {astro:null, birth:"", area:null, answers:new Array(QUIZ.length).fill(null), final:null, q:0, picked:null};
 
   PLACES.forEach(function(p,i){ var o=document.createElement("option"); o.value=i; o.textContent=p[0]; $("place").appendChild(o); });
   CN_CITIES.forEach(function(c,i){ var o=document.createElement("option"); o.value=i; o.textContent=c[0]; $("city").appendChild(o); });
@@ -395,9 +400,9 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
 
   $("go").addEventListener("click",function(){ if(build()){ state.picked=null; renderChart(); show(2); } });
 
-  /* ---------- 十題 ---------- */
+  /* ---------- 測驗 ---------- */
   function renderQ(){
-    var total=QUIZ.length+1, i=state.q, card=$("qCard");
+    var total=QUIZ.length+2, i=state.q, card=$("qCard");
     $("qNum").textContent="第 "+(i+1)+" 題，共 "+total+" 題";
     $("qBar").style.width=Math.round(i/total*100)+"%";
     $("qBack").textContent = i===0 ? "← 回命盤" : "← 上一題";
@@ -406,6 +411,10 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       $("qHint").textContent="選一個";
       html+='<p class="qtext">最近最困擾你的，是哪一塊？</p><div class="opts grid">';
       AREAS.forEach(function(a,k){ html+='<button type="button" class="opt" data-v="'+k+'" aria-pressed="'+(state.area===k)+'">'+a[0]+'</button>'; });
+    }else if(i===total-1){
+      $("qHint").textContent="選一個";
+      html+='<p class="qtext">'+esc(FINAL.q)+'</p><div class="opts">';
+      FINAL.opts.forEach(function(o,k){ html+='<button type="button" class="opt" data-v="'+k+'" aria-pressed="'+(state.final===k)+'">'+esc(o[1])+'</button>'; });
     }else{
       $("qHint").textContent="最近三個月，選最接近的";
       html+='<p class="qtext">'+esc(QUIZ[i-1][1])+'</p><div class="opts">';
@@ -416,10 +425,10 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     Array.prototype.forEach.call(card.querySelectorAll(".opt"),function(b){
       b.addEventListener("click",function(){
         var v=parseInt(b.getAttribute("data-v"),10);
-        if(i===0) state.area=v; else state.answers[i-1]=v;
+        if(i===0) state.area=v; else if(i===total-1) state.final=v; else state.answers[i-1]=v;
         Array.prototype.forEach.call(card.querySelectorAll(".opt"),function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
         setTimeout(function(){
-          if(state.q<QUIZ.length){ state.q++; renderQ(); }
+          if(state.q<total-1){ state.q++; renderQ(); }
           else{ $("qBar").style.width="100%"; renderResult(); show(4); }
         },220);
       });
@@ -431,11 +440,13 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   function renderResult(){
     var s={rel:0,dec:0,body:0};
     QUIZ.forEach(function(q,i){ s[q[0]]+=state.answers[i]||0; });
-    var keys=["rel","dec","body"], top=keys.slice().sort(function(x,y){return s[y]-s[x];})[0], t=TYPES[top];
+    var fk = state.final==null ? null : FINAL.opts[state.final][0];
+    if(fk) s[fk]+=2;
+    var keys=["rel","dec","body"], top=keys.slice().sort(function(x,y){ return (s[y]-s[x]) || ((y===fk)-(x===fk)); })[0], t=TYPES[top];
     var a=state.astro, area=AREAS[state.area==null?0:state.area], ap=byName(area[1]), yp=byBranch(YEAR_BRANCH);
     $("typeName").textContent=t.name; $("typeText").textContent=t.text;
     $("bars").innerHTML=keys.map(function(k){
-      return '<div class="bar"><span>'+TYPE_LABEL[k]+'</span><span class="track"><i class="fill" data-w="'+Math.round(s[k]/12*100)+'"></i></span><span class="n">'+s[k]+'/12</span></div>';
+      return '<div class="bar"><span>'+TYPE_LABEL[k]+'</span><span class="track"><i class="fill" data-w="'+Math.round(s[k]/MAX*100)+'"></i></span><span class="n">'+s[k]+'/'+MAX+'</span></div>';
     }).join("");
     setTimeout(function(){ Array.prototype.forEach.call(document.querySelectorAll(".fill"),function(f){ f.style.width=f.getAttribute("data-w")+"%"; }); },60);
 
@@ -459,7 +470,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       "2027 流年命宮：本命"+palName(yp.name)+"（"+starsText(yp)+"）",
       "2027 化忌："+(ji?palName(ji.name):"—"),
       "最困擾的領域："+area[0]+"（"+palName(area[1])+"："+starsText(ap)+"）",
-      "測驗：關係 "+s.rel+"/12、決策 "+s.dec+"/12、身體 "+s.body+"/12，主要是"+TYPE_LABEL[top]+"型",
+      "測驗：關係 "+s.rel+"/"+MAX+"、決策 "+s.dec+"/"+MAX+"、身體 "+s.body+"/"+MAX+"，主要是"+TYPE_LABEL[top]+"型",
       "最想解決的一件事："+v("a1"),
       "多久了、多常發生："+v("a2"),
       "試過的方法："+v("a3"),
