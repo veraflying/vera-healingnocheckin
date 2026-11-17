@@ -9,7 +9,7 @@
     {c:0,n:"紫微×靈氣整合",p:2200,d:"個案基本諮詢加上 30 分鐘遠距靈氣。先看懂，再把它鬆開。",z:1,base:1},
     {c:0,n:"關係導航",p:2698,d:"個人深度解析加上關係攻略，70–100 分鐘。",z:1,base:1},
     {c:0,n:"雙人同行｜全效合盤",p:4999,d:"兩位的命盤加上深度關係合盤，110–160 分鐘。",z:1,base:2},
-    {c:1,n:"靈氣療癒｜遠距",p:999,d:"靈氣簡單說，就是用手掌陪你放鬆的日式療法。遠距進行，住哪裡都可以。"},
+    {c:1,n:"靈氣療癒｜遠距",p:999,d:"靈氣簡單說，就是用手掌陪你放鬆的日式療法。遠距進行，住哪裡都可以。",online:1},
     {c:1,n:"靈氣療癒｜實體",p:1399,d:"面對面進行，地點在桃園。"},
     {c:1,n:"臼井聖火靈氣｜入門工作坊",p:1688,d:"實體 2 小時，2–10 人小班，滿 2 人開班。靈氣介紹、能量體驗、冥想和交流。之後報名一二階可以全額折抵。",link:["填工作坊報名表單","https://forms.gle/31xfHaLxk3f94HTD6"]},
     {c:1,n:"臼井聖火靈氣｜一二階",p:16688,d:"實體連續 2 天，含點化與符號，頒發證書。有人報名才開班。",link:["用 LINE 詢問開課時間","https://lin.ee/IuBJs3j"]},
@@ -24,6 +24,8 @@
   /* 已選品項裡「含命盤解讀」的最大人數：0 = 沒有可搭配加購的品項，2 = 雙人合盤 */
   function baseN(){var n=0;picked.forEach(function(i){if(ITEMS[i].base>n)n=ITEMS[i].base;});return n;}
   /* 加購價跟著人數走：雙人合盤是兩位的流年，所以 ×2 */
+  /* 紫微類（z）與遠距靈氣（online）屬於線上服務，需要勾選同意排除七日解除權 */
+  function needAgree(){return picked.some(function(i){return ITEMS[i].z || ITEMS[i].online;});}
   function price(i){return ITEMS[i].addon ? ADDON_PRICE*Math.max(1,baseN()) : ITEMS[i].p;}
 
   function renderTabs(){
@@ -65,13 +67,18 @@
       "項目："+(picked.length?picked.map(function(i){return ITEMS[i].n+(ITEMS[i].addon?(baseN()>1?"（加購，兩位）":"（加購）"):"")+" "+money(price(i));}).join("、"):"（尚未選擇）"),
       "合計："+money(sum),
       "稱呼："+v("oName"),"LINE 名稱："+v("oLine"),"方便時段："+v("oTime"),"備註："+v("oNote")];
+    var online=needAgree();
+    $("agreeBox").hidden=!online; $("agreeBox").style.display=online?"flex":"none";
+    if(online) lines.push("同意聲明："+($("agree").checked?"我了解線上服務一經提供即完成，同意排除七日解除權，並已閱讀改約與取消規則。":"（尚未勾選）"));
     if(zw) lines.push("生日資料：我會另外貼上命盤自我檢查的摘要，或補上國曆生日、出生時間、性別、出生地。");
     $("summary").textContent=lines.join("\n");
   }
   ["oName","oLine","oTime","oNote"].forEach(function(id){$(id).addEventListener("input",renderOrder);});
+  $("agree").addEventListener("change",renderOrder);
   $("copy").addEventListener("click",function(){
     var m=$("copyMsg");
     if(!picked.length){m.textContent="請先選至少一項服務。";return;}
+    if(needAgree() && !$("agree").checked){m.textContent="請先勾選預約單上方的同意聲明，再複製。";return;}
     var fb=function(){m.textContent="這支手機不能自動複製。請長按上面的預約單，全選後複製。";};
     try{navigator.clipboard.writeText($("summary").textContent).then(function(){m.textContent="已複製。打開 LINE 貼上就可以了。";},fb);}catch(e){fb();}
   });
