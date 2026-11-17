@@ -154,6 +154,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       </div>
       <label class="row" for="unsure"><input type="checkbox" id="unsure">我不確定出生時間，先用大概的</label>
       <label class="row" for="solar"><input type="checkbox" id="solar" checked>依出生地做真太陽時校正（建議保留勾選）</label>
+      <p class="fine" id="dstHint">勾選時會一併換算當年的夏令時間與舊時區：台灣 1946–1961、1974、1975、1979 年的夏季；中國 1986–1991 年的夏季；香港、澳門 1979 年以前有實施的年份；新加坡、吉隆坡 1981 年以前。有套用時，命盤上方會註明。</p>
       <button class="btn" id="go" type="button">排盤</button>
       <p class="msg" id="msg" role="status"></p>
       <p class="fine">上面先放了一組範例生日，請改成你自己的。資料只在你的手機上計算，不會上傳，也不會儲存。</p>
@@ -290,6 +291,10 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       next:"想談下去，適合「紫微×靈氣整合」：先看懂為什麼累，再用靈氣讓身體真的鬆下來。"}
   };
   var TYPE_LABEL = {rel:"關係",dec:"決策",body:"身體"};
+  var LOW_MAX = 3;
+  var LOW_TYPE = {name:"目前沒有明顯卡住的模式",text:"你的作答幾乎都是「完全沒有」，看起來最近的狀態算穩。下面是 2027 年對你這張盤的基本提醒，可以當作參考。",
+    tips:["紫微斗數看的是這一年哪個領域比較需要留意，適合想提早做準備的人。","靈氣是用手掌陪身體放鬆的方式，不需要先有狀況才能體驗。"],
+    next:"如果只是好奇，或有一件想問的事，直接在 LINE 跟我說你想了解什麼就可以，不用先選方案。"};
   var state = {astro:null, birth:"", area:null, answers:new Array(QUIZ.length).fill(null), final:null, q:0, picked:null};
 
   PLACES.forEach(function(p,i){ var o=document.createElement("option"); o.value=i; o.textContent=p[0]; $("place").appendChild(o); });
@@ -360,15 +365,17 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     if(!window.iztro){ $("msg").textContent="排盤程式沒有載入，請確認網路後重新整理。"; return false; }
     var dp=dv.split("-").map(Number), tp=tv.split(":").map(Number);
     var w=Date.UTC(dp[0],dp[1]-1,dp[2],tp[0],tp[1]);
-    var place=resolvePlace(), note="";
+    var place=resolvePlace(), note=""; state.timeNote="";
     if(place[3]===null && place[1]!=null && (Math.abs(place[1])>180 || place[2]<-12 || place[2]>14)){ $("msg").textContent="經度請填 -180 到 180，時區請填 -12 到 14。"; return false; }
     var off = place[3] ? zoneOffset(place[3], w) : (place[2]==null ? 480 : place[2]*60);
     if($("solar").checked && place[1]!=null){
       var adj=Math.round(place[1]*4 - off + eot(w));
       w+=adj*60000;
       note="（真太陽時 "+(adj>=0?"+":"")+adj+" 分"+(place[3] && off!==480 ? "，已換算當時當地的"+(off===540?"夏令時間":"時區") : "")+"）";
+      if(place[3] && off!==480) state.timeNote = off===540 ? "已套用夏令時間：出生當時當地時鐘比標準時間快 1 小時，已先扣回" : "已套用舊時區：出生當時當地不是 UTC+8，已換算";
     }else if(place[3] && off!==480){
       note="（注意：當時當地"+(off===540?"實施夏令時間，時鐘比標準時間快 1 小時":"的時區不是 UTC+8")+"，建議勾選真太陽時校正）";
+      state.timeNote = (off===540 ? "注意：出生當時當地實施夏令時間" : "注意：出生當時當地不是 UTC+8")+"，目前沒有換算，建議勾選真太陽時校正";
     }
     var d=new Date(w);
     try{
@@ -416,7 +423,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     var yp=byBranch(YEAR_BRANCH), ming=byName("命宮");
     $("cBig").textContent=palName(yp.name);
     $("cSmall").textContent=majors(yp).join("、") || "空宮";
-    $("meta").textContent="農曆 "+String(a.lunarDate).replace(/闰/g,"閏").replace(/腊/g,"臘")+" "+a.time+"｜"+a.fiveElementsClass+"｜命宮在"+ming.earthlyBranch;
+    $("meta").textContent="農曆 "+String(a.lunarDate).replace(/闰/g,"閏").replace(/腊/g,"臘")+" "+a.time+"｜"+a.fiveElementsClass+"｜命宮在"+ming.earthlyBranch+(state.timeNote?"｜"+state.timeNote:"");
     var pp=byBranch(state.picked), kw=keywords(pp);
     $("detail").innerHTML='<b>'+palName(pp.name)+'</b><span class="mute">管的是：'+esc(FOCUS[pp.name]||"")+'</span><span>'+esc(starsText(pp))+'</span>'
       +(kw.length?'<span class="fine">'+esc(kw.join("；"))+'</span>':'');
@@ -472,7 +479,8 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     QUIZ.forEach(function(q,i){ s[q[0]]+=state.answers[i]||0; });
     var fk = state.final==null ? null : FINAL.opts[state.final][0];
     if(fk) s[fk]+=2;
-    var keys=["rel","dec","body"], top=keys.slice().sort(function(x,y){ return (s[y]-s[x]) || ((y===fk)-(x===fk)); })[0], t=TYPES[top];
+    var raw=s.rel+s.dec+s.body-(fk?2:0), low = raw<=LOW_MAX;   // 12 題幾乎都答「完全沒有」：不硬給類型
+    var keys=["rel","dec","body"], top=keys.slice().sort(function(x,y){ return (s[y]-s[x]) || ((y===fk)-(x===fk)); })[0], t=low?LOW_TYPE:TYPES[top];
     var a=state.astro, area=AREAS[state.area==null?0:state.area], ap=byName(area[1]), yp=byBranch(YEAR_BRANCH);
     $("typeName").textContent=t.name; $("typeText").textContent=t.text;
     $("bars").innerHTML=keys.map(function(k){
@@ -500,13 +508,13 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       "2027 流年命宮：本命"+palName(yp.name)+"（"+starsText(yp)+"）",
       "2027 化忌："+(ji?palName(ji.name):"—"),
       "最困擾的領域："+area[0]+"（"+palName(area[1])+"："+starsText(ap)+"）",
-      "測驗：關係 "+s.rel+"/"+MAX+"、決策 "+s.dec+"/"+MAX+"、身體 "+s.body+"/"+MAX+"，主要是"+TYPE_LABEL[top]+"型",
+      "測驗：關係 "+s.rel+"/"+MAX+"、決策 "+s.dec+"/"+MAX+"、身體 "+s.body+"/"+MAX+(low?"，目前沒有明顯卡住的模式":"，主要是"+TYPE_LABEL[top]+"型"),
       "最想解決的一件事："+v("a1"),
       "多久了、多常發生："+v("a2"),
       "試過的方法："+v("a3"),
       "三個月後希望："+v("a4"),
       "目前居住："+($("live").value||"（未填）"),
-      "想了解："+({rel:"基本諮詢或關係導航",dec:"個案基本諮詢加購 2027 流年詳批",body:"紫微×靈氣整合"})[top]
+      "想了解："+(low?"（我想直接問：請在這裡寫下想了解的事）":({rel:"基本諮詢或關係導航",dec:"個案基本諮詢加購 2027 流年詳批",body:"紫微×靈氣整合"})[top])
     ].join("\n");
   }
   ["a1","a2","a3","a4"].forEach(function(id){ $(id).addEventListener("input",renderResult); });

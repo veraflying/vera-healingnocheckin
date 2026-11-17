@@ -2,13 +2,13 @@
 (function(){
   var $=function(id){return document.getElementById(id);};
   var CATS=["紫微斗數","靈氣","占卜"];
-  var BASE=0, ADDON=1;
+  var ADDON_PRICE=980;
   var ITEMS=[
-    {c:0,n:"個案基本諮詢",p:1399,d:"線上一對一，40–60 分鐘，含大限與流年指引。",z:1},
-    {c:0,n:"2027 流年詳批",p:980,d:"個案基本諮詢的加購項目，需搭配個案基本諮詢一起預約。針對 2027 這一年再多看一層，另外給你一頁重點和提醒。",z:1,addon:1},
-    {c:0,n:"紫微×靈氣整合",p:2200,d:"個案基本諮詢加上 30 分鐘遠距靈氣。先看懂，再把它鬆開。",z:1},
-    {c:0,n:"關係導航",p:2698,d:"個人深度解析加上關係攻略，70–100 分鐘。",z:1},
-    {c:0,n:"雙人同行｜全效合盤",p:4999,d:"兩位的命盤加上深度關係合盤，110–160 分鐘。",z:1},
+    {c:0,n:"個案基本諮詢",p:1399,d:"線上一對一，40–60 分鐘，含大限與流年指引。",z:1,base:1},
+    {c:0,n:"2027 流年詳批",p:ADDON_PRICE,d:"加購項目，可搭配個案基本諮詢、紫微×靈氣整合、關係導航或雙人合盤。針對 2027 這一年再多看一層，另外給你一頁重點和提醒。雙人合盤是兩位的流年，加購價為 1,960。",z:1,addon:1},
+    {c:0,n:"紫微×靈氣整合",p:2200,d:"個案基本諮詢加上 30 分鐘遠距靈氣。先看懂，再把它鬆開。",z:1,base:1},
+    {c:0,n:"關係導航",p:2698,d:"個人深度解析加上關係攻略，70–100 分鐘。",z:1,base:1},
+    {c:0,n:"雙人同行｜全效合盤",p:4999,d:"兩位的命盤加上深度關係合盤，110–160 分鐘。",z:1,base:2},
     {c:1,n:"靈氣療癒｜遠距",p:999,d:"靈氣簡單說，就是用手掌陪你放鬆的日式療法。遠距進行，住哪裡都可以。"},
     {c:1,n:"靈氣療癒｜實體",p:1399,d:"面對面進行，地點在桃園。"},
     {c:1,n:"臼井聖火靈氣｜入門工作坊",p:1688,d:"實體 2 小時，2–10 人小班，滿 2 人開班。靈氣介紹、能量體驗、冥想和交流。之後報名一二階可以全額折抵。",link:["填工作坊報名表單","https://forms.gle/31xfHaLxk3f94HTD6"]},
@@ -19,6 +19,12 @@
   function money(n){return n.toLocaleString("en-US");}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   function has(i){return picked.indexOf(i)>=0;}
+  function idx(test){for(var i=0;i<ITEMS.length;i++){if(test(ITEMS[i]))return i;}return -1;}
+  var ADDON=idx(function(it){return it.addon;}), BASE=idx(function(it){return it.n==="個案基本諮詢";});
+  /* 已選品項裡「含命盤解讀」的最大人數：0 = 沒有可搭配加購的品項，2 = 雙人合盤 */
+  function baseN(){var n=0;picked.forEach(function(i){if(ITEMS[i].base>n)n=ITEMS[i].base;});return n;}
+  /* 加購價跟著人數走：雙人合盤是兩位的流年，所以 ×2 */
+  function price(i){return ITEMS[i].addon ? ADDON_PRICE*Math.max(1,baseN()) : ITEMS[i].p;}
 
   function renderTabs(){
     $("tabs").innerHTML=CATS.map(function(c,i){return '<button class="tab" role="tab" type="button" data-c="'+i+'" aria-selected="'+(i===cat)+'">'+c+'</button>';}).join("");
@@ -38,16 +44,16 @@
     var k=picked.indexOf(i);
     if(k>=0){
       picked.splice(k,1);
-      if(i===BASE && has(ADDON)) picked.splice(picked.indexOf(ADDON),1);   // 拿掉基本諮詢，加購一起拿掉
+      if(has(ADDON) && !baseN()) picked.splice(picked.indexOf(ADDON),1);   // 可搭配的品項都拿掉了，加購一起拿掉
     }else{
-      if(i===ADDON && !has(BASE)) picked.push(BASE);                        // 加購時自動帶入基本諮詢
+      if(i===ADDON && !baseN()) picked.push(BASE);                         // 還沒選可搭配的品項時，自動帶入基本諮詢
       picked.push(i);
     }
     renderMenu(); renderOrder();
   }
   function renderOrder(){
     var sum=0;
-    $("picked").innerHTML=picked.length ? picked.map(function(i){sum+=ITEMS[i].p;return '<li><span>'+esc(ITEMS[i].n)+(ITEMS[i].addon?'（加購）':'')+'</span><span class="p">'+money(ITEMS[i].p)+'</span><button type="button" data-i="'+i+'" aria-label="移除 '+esc(ITEMS[i].n)+'">✕</button></li>';}).join("")
+    $("picked").innerHTML=picked.length ? picked.map(function(i){sum+=price(i);return '<li><span>'+esc(ITEMS[i].n)+(ITEMS[i].addon?(baseN()>1?'（加購，兩位）':'（加購）'):'')+'</span><span class="p">'+money(price(i))+'</span><button type="button" data-i="'+i+'" aria-label="移除 '+esc(ITEMS[i].n)+'">✕</button></li>';}).join("")
       : '<li class="empty">還沒有選服務。點「加入預約單」就會出現在這裡。</li>';
     Array.prototype.forEach.call($("picked").querySelectorAll("button"),function(b){b.addEventListener("click",function(){toggle(+b.getAttribute("data-i"));});});
     $("total").textContent=money(sum);
@@ -56,7 +62,7 @@
     var v=function(id){return $(id).value.trim()||"（未填）";};
     var zw=picked.some(function(i){return ITEMS[i].z;});
     var lines=["【預約單｜來自微辣個人網站】",
-      "項目："+(picked.length?picked.map(function(i){return ITEMS[i].n+(ITEMS[i].addon?"（加購）":"")+" "+money(ITEMS[i].p);}).join("、"):"（尚未選擇）"),
+      "項目："+(picked.length?picked.map(function(i){return ITEMS[i].n+(ITEMS[i].addon?(baseN()>1?"（加購，兩位）":"（加購）"):"")+" "+money(price(i));}).join("、"):"（尚未選擇）"),
       "合計："+money(sum),
       "稱呼："+v("oName"),"LINE 名稱："+v("oLine"),"方便時段："+v("oTime"),"備註："+v("oNote")];
     if(zw) lines.push("生日資料：我會另外貼上命盤自我檢查的摘要，或補上國曆生日、出生時間、性別、出生地。");
