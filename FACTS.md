@@ -16,7 +16,7 @@
 ## 資歷（對外寫法）
 
 - 紫微斗數：解盤超過 100 位，線上一對一諮詢
-- 靈氣：ICRT 臼井聖火靈氣師資、豐盛金錢靈氣師資
+- 靈氣：ICRT 臼井聖火靈氣師資、豐盛金錢靈氣師資（對外一律寫「師資」，不寫「師父階」）
 - 其他療癒：擴大療癒一階（Magnified Healing）、香巴拉靈氣（Shamballa Multi-Dimensional Healing）、SSR 光權靈氣（Sekhem-Seichim-Reiki）
 - 授課：目前教授臼井聖火靈氣課程，以實體小班進行（不寫成「只開小班」）
 - 不教紫微斗數課程
@@ -77,7 +77,7 @@
 - Instagram：https://www.instagram.com/vera_healingnocheckin
 - 服務預約表單：https://forms.gle/MWyL1mT33U6HLFRHA
 - 入門工作坊報名表單：https://forms.gle/31xfHaLxk3f94HTD6
-- 一二階報名表單：「臼井靈氣／聖火®靈氣 一二階報名表單」（公開連結待補；網站上一二階的按鈕目前連到 LINE）
+- 一二階報名表單：https://forms.gle/TXmKhGJyALkNrzuq5 （網站上一二階的按鈕維持連到 LINE，因為開課時間要先確認；確認好開課時間後才改連這份表單）
 
 ## 對外說話的界線
 
