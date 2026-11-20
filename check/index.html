@@ -5,9 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2027 命盤自我檢查｜微辣療癒不打卡</title>
-<meta name="description" content="免費十分鐘：排出你的紫微命盤，回答幾個小問題，看看 2027 丁未年你卡在哪裡，以及三件可以先做的小事。">
+<meta name="description" content="免費十分鐘：排出您的紫微命盤，回答幾個小問題，看看 2027 丁未年您卡在哪裡，以及三件可以先做的小事。">
 <meta property="og:title" content="2027 命盤自我檢查｜微辣療癒不打卡">
-<meta property="og:description" content="免費十分鐘：排出你的紫微命盤，看看 2027 年你卡在哪裡，以及三件可以先做的小事。">
+<meta property="og:description" content="免費十分鐘：排出您的紫微命盤，看看 2027 年您卡在哪裡，以及三件可以先做的小事。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://healingnocheckin.com/check/">
 <meta property="og:image" content="https://healingnocheckin.com/og-check.jpg">
@@ -126,7 +126,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
 <body>
 <main>
   <header>
-    <p class="eyebrow">療癒不打卡的命理師微辣</p>
+    <p class="eyebrow">療癒不打卡的微辣</p>
     <h1>2027 命盤自我檢查</h1>
   </header>
 
@@ -137,8 +137,8 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   <!-- 1 生日 -->
   <section class="step" id="s1">
     <div class="panel card">
-      <h2>先排出你的命盤</h2>
-      <p class="mute">大約十分鐘。排盤、回答十幾個小問題，就會看到你今年卡在哪裡，以及三個可以先做的小事。</p>
+      <h2>先排出您的命盤</h2>
+      <p class="mute">總共約十分鐘。先簡易排盤，再回答十幾個小問題，就可以看到您今年卡在哪裡，以及三個可以先立即執行的小事情~</p>
       <div class="fields">
         <label for="bdate">國曆生日<input type="date" id="bdate" min="1930-01-01" max="2026-12-31" value="1990-06-25"></label>
         <label for="btime">出生時間<input type="time" id="btime" value="12:30"></label>
@@ -157,7 +157,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       <p class="fine" id="dstHint">勾選時會一併換算當年的夏令時間與舊時區：台灣 1946–1961、1974、1975、1979 年的夏季；中國 1986–1991 年的夏季；香港、澳門 1979 年以前有實施的年份；新加坡、吉隆坡 1981 年以前。有套用時，命盤上方會註明。</p>
       <button class="btn" id="go" type="button">排盤</button>
       <p class="msg" id="msg" role="status"></p>
-      <p class="fine">上面先放了一組範例生日，請改成你自己的。資料只在你的手機上計算，不會上傳，也不會儲存。</p>
+      <p class="fine">上面先放了一組範例生日，請改成您自己的。資料只在您的手機上計算，不會上傳，也不會儲存。</p>
     </div>
   </section>
 
@@ -165,14 +165,14 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   <section class="step" id="s2" hidden>
     <button class="back" type="button" data-to="1">← 改生日</button>
     <div class="panel card">
-      <h2>這是你的命盤</h2>
+      <h2>這是您的簡易命盤</h2>
       <p class="fine" id="meta"></p>
       <div class="chart" id="chart"></div>
       <div class="detail" id="detail" aria-live="polite"></div>
-      <p class="fine">點任何一格看說明。金色是 2027 流年命宮；小字「27」是 2027 丁未年的四化，沒標的是你出生年的。</p>
+      <p class="fine">點任何一格看說明。金色是 2027 流年命宮；小字「27」是 2027 丁未年的四化，沒標的是您出生年的四化。</p>
     </div>
     <div class="panel card">
-      <h3>2027 年，你的盤上有這幾件事</h3>
+      <h3>2027 年，您的命盤上有這幾件事</h3>
       <ul class="facts" id="facts"></ul>
       <button class="btn" type="button" data-to="3">下一步：開始測驗</button>
     </div>
@@ -192,7 +192,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   <section class="step" id="s4" hidden aria-live="polite">
     <button class="back" type="button" data-to="3">← 重新作答</button>
     <div class="panel card">
-      <p class="eyebrow">你的主要模式</p>
+      <p class="eyebrow" id="typeEyebrow">您的主要模式</p>
       <p class="type" id="typeName"></p>
       <p id="typeText"></p>
       <div class="bars" id="bars"></div>
@@ -208,9 +208,9 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     <div class="panel card">
       <h3>這一頁做不到的事</h3>
       <ul class="plain">
-        <li>這些星放在一起，對你這個人代表什麼。</li>
+        <li>這些星放在一起，對您這個人代表什麼。</li>
         <li>時間點：哪幾個月要注意、這個十年的大方向。</li>
-        <li>適合你的做法與先後順序，以及有人陪你做。</li>
+        <li>適合您的做法與先後順序，以及有人陪您做。</li>
       </ul>
       <p id="nextStep"></p>
     </div>
@@ -221,7 +221,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
       <label for="a2">多久了？多常發生？<textarea id="a2"></textarea></label>
       <label for="a3">試過哪些方法？<textarea id="a3"></textarea></label>
       <label for="a4">三個月後，希望有什麼不一樣？<textarea id="a4"></textarea></label>
-      <label for="live">你現在住在哪一區？<select id="live"><option value="">不想說</option><option>桃園</option><option>台北、新北、基隆</option><option>新竹、苗栗</option><option>台灣其他縣市</option><option>海外</option></select></label>
+      <label for="live">您現在住在哪一區？<select id="live"><option value="">不想說</option><option>桃園</option><option>台北、新北、基隆</option><option>新竹、苗栗</option><option>台灣其他縣市</option><option>海外</option></select></label>
       <p class="msg" id="liveMsg"></p>
       <div id="summary" tabindex="0"></div>
       <button class="btn" id="copy" type="button">複製我的摘要</button>
@@ -233,7 +233,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
 
   <footer class="fine">
     <p><a href="../" target="_blank" rel="noopener" style="color:var(--gold)">認識微辣，看服務與費用</a>　<a href="../privacy.html" target="_blank" rel="noopener" style="color:var(--mute)">隱私與個資說明</a></p>
-    <p>排盤使用開源程式庫 iztro，設定為農曆正月初一換年、閏月月中分界、晚子時算次日。各派算法略有不同。星曜關鍵字是通用的簡化說明，不是對你個人的判斷。</p>
+    <p>排盤使用開源程式庫 iztro，設定為農曆正月初一換年、閏月月中分界、晚子時算次日。各派算法略有不同。星曜關鍵字是通用的簡化說明，不是對您個人的判斷。</p>
     <p>本頁為命理文化科普與自我整理工具，不能取代醫療、心理、法律或財務專業協助。持續失眠、身體不適或情緒低落已經影響生活時，請先找醫師或心理專業人員。</p>
   </footer>
 </main>
@@ -246,21 +246,21 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   var POS = {"子":[4,3],"丑":[4,2],"寅":[4,1],"卯":[3,1],"辰":[2,1],"巳":[1,1],"午":[1,2],"未":[1,3],"申":[1,4],"酉":[2,4],"戌":[3,4],"亥":[4,4]};
   var YEAR_BRANCH = "未";
   var Y27 = {"太陰":"祿","天同":"權","天機":"科","巨門":"忌"};
-  var HUA = {"祿":"比較順、資源會往這裡來","權":"會想掌握、要花力氣去推","科":"容易被看見、適合學習與整理","忌":"你會特別在意、需要多花力氣"};
-  var STAR = {"紫微":"想主導，重視被尊重","天機":"想得多，變動快","太陽":"習慣付出，在意被看見","武曲":"務實直接，重結果","天同":"想要舒服，不愛衝突","廉貞":"原則感強，好勝","天府":"求穩，守得住","太陰":"細膩，感受放心裡","貪狼":"想要的多，愛新鮮","巨門":"靠說話處理事情，容易多慮","天相":"顧全大局，在意公平","天梁":"愛照顧人，也愛操心","七殺":"衝得快，不服輸","破軍":"想打掉重來，不安於現狀"};
-  var FOCUS = {"命宮":"你自己想成為什麼樣的人","兄弟":"同輩與夥伴","夫妻":"親密關係","子女":"你照顧的人和你創造的東西","財帛":"錢怎麼賺、怎麼花","疾厄":"身體與作息的節奏","遷移":"走出去、外面的環境","僕役":"人際圈與團隊","官祿":"工作與角色","田宅":"家與安頓感","福德":"內在的餘裕與休息","父母":"長輩、主管與規則"};
+  var HUA = {"祿":"比較順、資源會往這裡來、有機緣的地方","權":"會想掌握、要花力氣去推、容易懶但不得不被推著前進","科":"容易被看見、有名聲，適合學習與整理","忌":"講話易得罪人的地方，會過度在意和執著，需要多花力氣關注"};
+  var STAR = {"紫微":"想主導，喜歡被尊重","天機":"想得多，變動快","太陽":"習慣付出，在意被看見","武曲":"務實直接，重結果","天同":"想要舒服，不愛衝突","廉貞":"原則感強，又敏感多變","天府":"求穩，保守，守得住，會存錢","太陰":"細膩，感受放心裡，會精打細算","貪狼":"想要的多，愛新鮮","巨門":"靠說話處理事情，容易多慮","天相":"顧全大局，在意公平","天梁":"愛照顧人，也愛操心","七殺":"衝得快，不服輸","破軍":"想打掉重來，不安於現狀"};
+  var FOCUS = {"命宮":"您自己想成為什麼樣的人","兄弟":"同輩與夥伴","夫妻":"親密關係","子女":"您照顧的人和您創造的東西","財帛":"錢怎麼賺、怎麼花、理財","疾厄":"身體與作息的節奏","遷移":"走出去、外面的環境","僕役":"人際圈與團隊","官祿":"工作與角色","田宅":"家與安頓感","福德":"內在的餘裕與休息","父母":"長輩、主管與規則"};
   var PLACES = [["不指定",null],["台北",121.56],["新北",121.46],["基隆",121.74],["桃園",121.30],["新竹",120.97],["苗栗",120.82],["台中",120.68],["彰化",120.54],["南投",120.68],["雲林",120.54],["嘉義",120.45],["台南",120.21],["高雄",120.31],["屏東",120.49],["宜蘭",121.75],["花蓮",121.60],["台東",121.14],["澎湖",119.57],["金門",118.32],["馬祖",119.95],["香港",114.17],["澳門",113.54],["新加坡",103.82],["吉隆坡",101.69],["中國","CN"],["其他地區","OTHER"]];
   var CN_CITIES = [["北京",116.40],["上海",121.47],["天津",117.20],["重慶",106.55],["廣州",113.26],["深圳",114.06],["杭州",120.16],["南京",118.80],["蘇州",120.62],["廈門",118.09],["福州",119.30],["泉州",118.68],["武漢",114.31],["成都",104.07],["西安",108.94],["長沙",112.94],["鄭州",113.63],["濟南",117.00],["青島",120.38],["合肥",117.23],["南昌",115.86],["瀋陽",123.43],["大連",121.61],["哈爾濱",126.53],["長春",125.32],["石家莊",114.51],["太原",112.55],["呼和浩特",111.75],["昆明",102.83],["貴陽",106.63],["南寧",108.37],["海口",110.20],["蘭州",103.83],["西寧",101.78],["銀川",106.23],["烏魯木齊",87.62],["拉薩",91.13]];
   var AREAS = [
-    ["工作與角色","官祿","這週挑一件工作上的事，先問自己：這是我要的，還是別人期待的？"],
-    ["感情與伴侶","夫妻","下次想把話吞下去的時候，先說一句「我需要想一下」。"],
-    ["金錢","財帛","記三天的花費，只看哪一筆花完覺得值得。"],
-    ["家與家人","田宅","在家裡留一個只屬於你的角落，或只屬於你的十分鐘。"],
-    ["孩子與創作","子女","把對孩子或作品的期待寫下來，挑一條可以先放掉的。"],
-    ["身體與作息","疾厄","固定一個上床時間，先守七天。"],
-    ["人際與團隊","僕役","列出最近最耗你力氣的三個人，挑一位少來往一次。"],
-    ["情緒與休息","福德","每天留十分鐘什麼都不做，也不滑手機。"],
-    ["自己與方向","命宮","寫下三件「如果沒有人會評價，我想做的事」。"]
+    ["工作與角色","官祿","這週挑一件工作上的事，先問自己：這是我自己要做的？還是為了符合別人期待而做的？","工作"],
+    ["感情與伴侶","夫妻","下次想把話吞下去的時候，先說一句「我需要想一想再跟你説」。","感情"],
+    ["金錢","財帛","記錄三天的花費，再回頭看看哪一筆花完覺得值得，哪一筆不值得。","金錢"],
+    ["家與家人","田宅","在家裡佈置一個只屬於自己的角落，或每天安排只屬於自己的十分鐘。","家庭"],
+    ["孩子與創作","子女","把對孩子或作品的期待寫下來，挑一條可以先放掉的。","孩子與創作"],
+    ["身體與作息","疾厄","設定一個上床時間，先堅持三天就好。","身體"],
+    ["人際與團隊","僕役","列出最近最耗您力氣的三個人，挑一位少來往一次。","人際"],
+    ["情緒與休息","福德","每天留十分鐘什麼都不做，也不滑手機，就靜靜的坐著或躺著。","情緒"],
+    ["自己與方向","命宮","寫下三件「如果不在意他人的想法或言論，我最想做的事」。","自我方向"]
   ];
   var QUIZ = [
     ["rel","跟某些人相處完，我需要一段時間才能恢復"],
@@ -276,25 +276,28 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     ["body","忙起來會忘記吃飯、喝水，或一直憋尿"],
     ["dec","我會用「等時機對了再說」把事情往後延"]
   ];
-  var FINAL = {q:"如果明天醒來，有一件事突然變好了，你最希望是哪一件？", opts:[["rel","跟某個人的相處變輕鬆了"],["dec","卡住的那個決定終於有答案了"],["body","身體和精神都恢復了元氣"]]};
-  var MAX = 4*4+2;
+  var FINAL = {q:"如果明天醒來，有一件事突然變好了，您最希望是哪一件？", opts:[["rel","跟某個人的相處變輕鬆了"],["dec","卡住的那個決定終於有答案了"],["body","身體和精神都恢復了元氣"]]};
+  var PTS = [0,1,2,3,5];
+  var MAX = 4*5+2;
   var SCALE = ["完全沒有：最近三個月想不起來有過","很少：三個月內一兩次","有時：大約每個月幾次","常常：幾乎每週都有","總是：幾乎每天，已經影響生活"];
   var TYPES = {
-    rel:{name:"關係型：同一種互動一再重演",text:"你卡住的地方多半出現在和人之間：說不出口的話、重複的爭執、總是由你讓步。",
-      tips:["每天記一次「我想說但沒說的一句話」。只記下來，不用處理。","這週選一件不重要的小事，練習說一次「不」。"],
-      next:"想談下去，適合「個案基本諮詢」或「關係導航」：看你的夫妻宮、福德宮與對宮怎麼互相影響，再談怎麼開口。"},
-    dec:{name:"決策型：想動，但一直停在原地",text:"你卡住的地方多半出現在選擇：想了很久沒有動，或動了之後發現換湯不換藥。",
-      tips:["把卡住的決定寫成兩欄：「我怕失去的」和「我想得到的」，每天各補一行。","替這個決定訂一個「最晚哪一天再看一次」的日期，在那之前不反覆想。"],
-      next:"想談下去，適合「個案基本諮詢」，再加購「2027 流年詳批」：先看懂你的盤，再看今年適不適合動、要注意哪一格。"},
-    body:{name:"身體型：身體比腦袋先知道",text:"你卡住的地方多半先出現在身體：睡不好、提不起勁、力氣都給了別人。",
-      tips:["睡前把手放在胸口或腹部三分鐘，只數呼吸。持續不適請先看醫生。","這週拒絕一件不是非你不可的事，把那段時間拿來休息。"],
-      next:"想談下去，適合「紫微×靈氣整合」：先看懂為什麼累，再用靈氣讓身體真的鬆下來。"}
+    rel:{name:"關係型：同一種互動一再重演",text:"您卡住的地方多半出現在和人之間：說不出口的話、重複的爭執、總是由您讓步。",
+      tips:["每天記錄一次「我想說但沒說的一句話」。只記錄下來，不用處理。","這週選一件不重要的小事，練習說一次「不」。"],
+      next:"想再多瞭解互動關係的底層邏輯嗎？想知道如何反轉嗎？適合「個案基本諮詢」或「關係導航」：看您的夫妻宮、福德宮與對宮怎麼互相影響，再談怎麼開口。"},
+    dec:{name:"決策型：想動，但一直停在原地",text:"您卡住的地方多半出現在選擇：想了很久沒有動，或動了之後發現換湯不換藥。",
+      tips:["把卡住的決定寫成兩欄：「我怕失去的」和「我想得到的」，每天各補一行。","替一個決定訂一個「最晚哪一天再看一次」的日期，在那之前不反覆想。"],
+      next:"想再多瞭解卡住的底層邏輯嗎？想知道如何改善？適合「個案基本諮詢」，再加購「2027 流年詳批」：先看懂您的盤，再看今年適不適合動、要注意哪一格。"},
+    body:{name:"身體型：身體比腦袋先知道",text:"您卡住的地方多半先出現在身體：睡不好、提不起勁、力氣都給了別人。",
+      tips:["睡前把手放在胸口或腹部三分鐘，只數呼吸。持續不適請先看醫生。","這週拒絕一件不是非您不可的事，把那段時間拿來休息。"],
+      next:"想再多瞭解身體和心靈的狀態嗎？想知道如何改善？適合「紫微×靈氣整合」：先看懂為什麼累，再用靈氣讓身體真的鬆下來。"}
   };
+  /* 領域 × 類型的專屬說明：COMBO[宮位][類型]，沒有寫的組合就不顯示 */
+  var COMBO = {};
   var TYPE_LABEL = {rel:"關係",dec:"決策",body:"身體"};
   var LOW_MAX = 3;
-  var LOW_TYPE = {name:"目前沒有明顯卡住的模式",text:"你的作答幾乎都是「完全沒有」，看起來最近的狀態算穩。下面是 2027 年對你這張盤的基本提醒，可以當作參考。",
+  var LOW_TYPE = {name:"目前沒有明顯卡住的模式",text:"您的作答幾乎都是「完全沒有」，看起來最近的狀態算穩。下面是 2027 年對您這張盤的基本提醒，可以當作參考。",
     tips:["紫微斗數看的是這一年哪個領域比較需要留意，適合想提早做準備的人。","靈氣是用手掌陪身體放鬆的方式，不需要先有狀況才能體驗。"],
-    next:"如果只是好奇，或有一件想問的事，直接在 LINE 跟我說你想了解什麼就可以，不用先選方案。"};
+    next:"如果只是好奇，或有一件想問的事，直接在 LINE 跟我說您想了解什麼就可以，不用先選方案。"};
   var state = {astro:null, birth:"", area:null, answers:new Array(QUIZ.length).fill(null), final:null, q:0, picked:null};
 
   PLACES.forEach(function(p,i){ var o=document.createElement("option"); o.value=i; o.textContent=p[0]; $("place").appendChild(o); });
@@ -446,7 +449,7 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
     var html='<div class="card" style="display:flex;flex-direction:column;gap:14px">';
     if(i===0){
       $("qHint").textContent="選一個";
-      html+='<p class="qtext">最近最困擾你的，是哪一塊？</p><div class="opts grid">';
+      html+='<p class="qtext">最近最困擾您的，是哪一塊？</p><div class="opts grid">';
       AREAS.forEach(function(a,k){ html+='<button type="button" class="opt" data-v="'+k+'" aria-pressed="'+(state.area===k)+'">'+a[0]+'</button>'; });
     }else if(i===total-1){
       $("qHint").textContent="選一個";
@@ -476,13 +479,15 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
   /* ---------- 結果 ---------- */
   function renderResult(){
     var s={rel:0,dec:0,body:0};
-    QUIZ.forEach(function(q,i){ s[q[0]]+=state.answers[i]||0; });
+    QUIZ.forEach(function(q,i){ s[q[0]]+=PTS[state.answers[i]||0]; });
     var fk = state.final==null ? null : FINAL.opts[state.final][0];
     if(fk) s[fk]+=2;
     var raw=s.rel+s.dec+s.body-(fk?2:0), low = raw<=LOW_MAX;   // 12 題幾乎都答「完全沒有」：不硬給類型
     var keys=["rel","dec","body"], top=keys.slice().sort(function(x,y){ return (s[y]-s[x]) || ((y===fk)-(x===fk)); })[0], t=low?LOW_TYPE:TYPES[top];
     var a=state.astro, area=AREAS[state.area==null?0:state.area], ap=byName(area[1]), yp=byBranch(YEAR_BRANCH);
-    $("typeName").textContent=t.name; $("typeText").textContent=t.text;
+    $("typeEyebrow").textContent="您在「"+area[3]+"」上的主要模式";
+    var combo = low ? "" : ((COMBO[area[1]]||{})[top]||"");
+    $("typeName").textContent=t.name; $("typeText").textContent=t.text+(combo?" "+combo:"");
     $("bars").innerHTML=keys.map(function(k){
       return '<div class="bar"><span>'+TYPE_LABEL[k]+'</span><span class="track"><i class="fill" data-w="'+Math.round(s[k]/MAX*100)+'"></i></span><span class="n">'+s[k]+'/'+MAX+'</span></div>';
     }).join("");
@@ -490,14 +495,14 @@ ul.plain{margin:0;padding-left:1.2em;color:var(--mute);font-size:.92rem}
 
     var kw=keywords(ap), touch=majors(ap).filter(function(x){return Y27[x];});
     var read=[
-      ["你選的「"+area[0]+"」", "對應你的"+palName(area[1])+"："+starsText(ap)+"。"+(kw.length?" "+kw.join("；")+"。":"")],
+      ["您選的「"+area[0]+"」", "對應您的"+palName(area[1])+"："+starsText(ap)+"。"+(kw.length?" "+kw.join("；")+"。":"")],
       ["2027 年這一格", touch.length ? touch.map(function(x){return x+"化"+Y27[x]+"，"+HUA[Y27[x]];}).join("；")+"。" : "今年的四化沒有直接落在這一格，壓力比較可能來自別處。"],
-      ["今年的重心", "流年命宮在本命"+palName(yp.name)+"，主題是"+FOCUS[yp.name]+"。"+(yp.name===area[1]?"剛好就是你最困擾的這一塊，所以今年特別有感。":"")]
+      ["今年的重心", "流年命宮在本命"+palName(yp.name)+"，主題是"+FOCUS[yp.name]+"。"+(yp.name===area[1]?"剛好就是您最困擾的這一塊，所以今年特別有感。":"")]
     ];
     $("read").innerHTML=read.map(function(r){ return '<li><span class="k">'+esc(r[0])+'</span><span>'+esc(r[1])+'</span></li>'; }).join("");
     $("tips").innerHTML=t.tips.concat([area[2]]).map(function(x){ return "<li>"+esc(x)+"</li>"; }).join("");
     $("nextStep").textContent=t.next;
-    $("liveMsg").textContent = /桃園|台北|新竹/.test($("live").value) ? "你住得不遠。實體靈氣工作坊開課時，可以在 LINE 跟我說「工作坊」。" : "";
+    $("liveMsg").textContent = /桃園|台北|新竹/.test($("live").value) ? "您住得不遠。實體靈氣工作坊開課時，可以在 LINE 跟我說「工作坊」。" : "";
 
     var ji=a.palaces.filter(function(p){return majors(p).indexOf("巨門")>=0;})[0];
     var v=function(id){ return $(id).value.trim() || "（未填）"; };
